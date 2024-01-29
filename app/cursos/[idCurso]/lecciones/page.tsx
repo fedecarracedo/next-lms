@@ -5,7 +5,6 @@ export default function Lecciones() {
   return (
     <div className={'lessonContainer'}>
       <LeftContentSidePanel />
-      <h1>Pagina de lecciones</h1>
     </div>
   );
 }

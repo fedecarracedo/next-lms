@@ -53,7 +53,7 @@ export default function LeftContentSidePanel() {
                 <PresentationChartBarIcon className="h-5 w-5" />
               </ListItemPrefix>
               <Typography placeholder={''} color="blue-gray" className="mr-auto font-normal">
-                Dashboard
+                <strong>Unidad 1:</strong> Analisis
               </Typography>
             </AccordionHeader>
           </ListItem>
@@ -95,7 +95,7 @@ export default function LeftContentSidePanel() {
                 <ShoppingBagIcon className="h-5 w-5" />
               </ListItemPrefix>
               <Typography placeholder={''} color="blue-gray" className="mr-auto font-normal">
-                E-Commerce
+                <strong>Unidad 2:</strong> La venta
               </Typography>
             </AccordionHeader>
           </ListItem>
