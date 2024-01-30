@@ -1,0 +1,32 @@
+[
+    {
+        "idLeccion": 1,
+        "idUnidad": 1,
+        "name": "Negociacion y oratoria"
+    },
+    {
+        "idLeccion": 2,
+        "idUnidad": 2,
+        "name": "Modelo Canva de negocios"
+    },
+    {
+        "idLeccion": 3,
+        "idUnidad": 2,
+        "name": "Improvisacion instantanea"
+    },
+    {
+        "idLeccion": 4,
+        "idUnidad": 3,
+        "name": "PowerPoint en el trabajo"
+    },
+    {
+        "idLeccion": 5,
+        "idUnidad": 4,
+        "name": "Excel en la vida"
+    },
+    {
+        "idLeccion": 6,
+        "idUnidad": 5,
+        "name": "Mi perro lalo"
+    }
+]

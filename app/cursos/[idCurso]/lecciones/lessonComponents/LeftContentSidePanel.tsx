@@ -1,6 +1,6 @@
 'use client';
 
-import React, { SetStateAction } from "react";
+import React, { SetStateAction, useEffect } from "react";
 import {
   Card,
   Typography,
@@ -22,100 +22,35 @@ import {
   PowerIcon,
 } from "@heroicons/react/24/solid";
 import { ChevronRightIcon, ChevronDownIcon } from "@heroicons/react/24/outline";
+import '../../lessonStyles.css'
+import obtenerUnidadesCurso from "@/app/controllers/DatabaseController";
+import Unidad from "@/app/model/Unidad";
+import LessonAccordion from "./LessonAccordion";
  
-export default function LeftContentSidePanel() {
+export default function LeftContentSidePanel({ idCurso }: { idCurso: number }) {
   const [open, setOpen] = React.useState(0);
- 
+  const [unidades, setUnidades] = React.useState<Unidad[]>([])
+  useEffect(() => {
+    setUnidades(obtenerUnidadesCurso(idCurso))
+  }, [])
   const handleOpen = (value: SetStateAction<number>) => {
     setOpen(open === value ? 0 : value);
   };
  
   return (
-    <Card placeholder={''} className="h-[calc(100vh-2rem)] w-full max-w-[20rem] p-4 shadow-xl shadow-blue-gray-900/5">
+    <Card placeholder={''} className="h-[calc(89vh)] w-full max-w-[20rem] p-4 shadow-xl shadow-blue-gray-900/5 LessonContent">
       <div className="mb-2 p-4">
         <Typography placeholder={''} variant="h5" color="blue-gray">
-          Tabla de contenidos
+          Tabla de contenidos curso {idCurso}
         </Typography>
+        
       </div>
       <List placeholder={''}>
-        <Accordion placeholder={''}
-          open={open === 1}
-          icon={
-            <ChevronDownIcon
-              strokeWidth={2.5}
-              className={`mx-auto h-4 w-4 transition-transform ${open === 1 ? "rotate-180" : ""}`}
-            />
-          }
-        >
-          <ListItem placeholder={''} className="p-0" selected={open === 1}>
-            <AccordionHeader placeholder={''} onClick={() => handleOpen(1)} className="border-b-0 p-3">
-              <ListItemPrefix placeholder={''}>
-                <PresentationChartBarIcon className="h-5 w-5" />
-              </ListItemPrefix>
-              <Typography placeholder={''} color="blue-gray" className="mr-auto font-normal">
-                <strong>Unidad 1:</strong> Analisis
-              </Typography>
-            </AccordionHeader>
-          </ListItem>
-          <AccordionBody className="py-1">
-            <List placeholder={''} className="p-0">
-              <ListItem placeholder={''}>
-                <ListItemPrefix placeholder={''}>
-                  <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                </ListItemPrefix>
-                Analytics
-              </ListItem>
-              <ListItem placeholder={''}>
-                <ListItemPrefix placeholder={''}>
-                  <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                </ListItemPrefix>
-                Reporting
-              </ListItem>
-              <ListItem placeholder={''}>
-                <ListItemPrefix placeholder={''}>
-                  <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                </ListItemPrefix>
-                Projects
-              </ListItem>
-            </List>
-          </AccordionBody>
-        </Accordion>
-        <Accordion placeholder={''}
-          open={open === 2}
-          icon={
-            <ChevronDownIcon
-              strokeWidth={2.5}
-              className={`mx-auto h-4 w-4 transition-transform ${open === 2 ? "rotate-180" : ""}`}
-            />
-          }
-        >
-          <ListItem placeholder={''} className="p-0" selected={open === 2}>
-            <AccordionHeader placeholder={''} onClick={() => handleOpen(2)} className="border-b-0 p-3">
-              <ListItemPrefix placeholder={''}>
-                <ShoppingBagIcon className="h-5 w-5" />
-              </ListItemPrefix>
-              <Typography placeholder={''} color="blue-gray" className="mr-auto font-normal">
-                <strong>Unidad 2:</strong> La venta
-              </Typography>
-            </AccordionHeader>
-          </ListItem>
-          <AccordionBody className="py-1">
-            <List placeholder={''} className="p-0">
-              <ListItem placeholder={''}>
-                <ListItemPrefix placeholder={''}>
-                  <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                </ListItemPrefix>
-                Orders
-              </ListItem>
-              <ListItem placeholder={''}>
-                <ListItemPrefix placeholder={''}>
-                  <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                </ListItemPrefix>
-                Products
-              </ListItem>
-            </List>
-          </AccordionBody>
-        </Accordion>
+        {unidades.map(unidad => {
+            return (
+              <LessonAccordion open={open} handleOpen={handleOpen} unitId={unidad.id} description={unidad.nombre} />
+            )
+          })}
         <hr className="my-2 border-blue-gray-50" />
         <ListItem placeholder={''}>
           <ListItemPrefix placeholder={''}>
