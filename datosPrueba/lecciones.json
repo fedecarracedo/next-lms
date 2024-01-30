@@ -2,31 +2,37 @@
     {
         "idLeccion": 1,
         "idUnidad": 1,
-        "name": "Negociacion y oratoria"
+        "name": "Negociacion y oratoria",
+        "contenido": "<p>Prueba de contenido Negociacion y Oratoria</p>"
     },
     {
         "idLeccion": 2,
         "idUnidad": 2,
-        "name": "Modelo Canva de negocios"
+        "name": "Modelo Canva de negocios",
+        "contenido": "<p>Prueba de contenido Modelo Canva de negocios</p>"
     },
     {
         "idLeccion": 3,
         "idUnidad": 2,
-        "name": "Improvisacion instantanea"
+        "name": "Improvisacion instantanea",
+        "contenido": "<p>Prueba de contenido Modelo Canva de negocios</p>"
     },
     {
         "idLeccion": 4,
         "idUnidad": 3,
-        "name": "PowerPoint en el trabajo"
+        "name": "PowerPoint en el trabajo",
+        "contenido": "<p>Prueba de contenido Modelo Canva de negocios</p>"
     },
     {
         "idLeccion": 5,
         "idUnidad": 4,
-        "name": "Excel en la vida"
+        "name": "Excel en la vida",
+        "contenido": "<p>Prueba de contenido Modelo Canva de negocios</p>"
     },
     {
         "idLeccion": 6,
         "idUnidad": 5,
-        "name": "Mi perro lalo"
+        "name": "Mi perro lalo",
+        "contenido": "<p>Prueba de contenido Modelo Canva de negocios</p>"
     }
 ]

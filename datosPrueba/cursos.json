@@ -1,12 +1,12 @@
 [
     {
         "id": 1,
-        "name": "Course 1",
+        "name": "Marketing 360°",
         "description": "A nice course"
     },
     {
         "id": 2,
-        "name": "Course 2",
+        "name": "Mujeres en Tecnología",
         "description": "Another nice course"
     }
 ]

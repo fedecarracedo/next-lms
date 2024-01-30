@@ -5,7 +5,7 @@
 .lessonContainer {
     display: flex;
     flex: 1;
-    margin-top: 11vh;
+    margin-top: 12vh;
 }
 
 .LessonBody {
@@ -21,4 +21,10 @@
     display: block;
     top: 0;
     z-index: 1;
+}
+
+.VideoContainer {
+    width: 100%;
+    padding: 5px 0;
+    margin: 20px 0;
 }

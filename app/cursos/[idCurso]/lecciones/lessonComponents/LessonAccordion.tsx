@@ -12,8 +12,10 @@ import {
   PresentationChartBarIcon,
 } from "@heroicons/react/24/solid";
 import { ChevronRightIcon, ChevronDownIcon } from "@heroicons/react/24/outline";
+import Leccion from "@/app/model/Leccion";
+import LessonItem from "./LessonItem";
 
-export default function LessonAccordion({open, handleOpen, unitId, description}: {open: number, handleOpen: any, unitId: number, description:string}) {
+export default function LessonAccordion({open, handleOpen, unitId, description, lecciones}: {open: number, handleOpen: any, unitId: number, description:string, lecciones: Leccion[]}) {
     return(
         <Accordion placeholder={''}
               open={open === unitId}
@@ -36,24 +38,9 @@ export default function LessonAccordion({open, handleOpen, unitId, description}:
               </ListItem>
               <AccordionBody className="py-1">
                 <List placeholder={''} className="p-0">
-                  <ListItem placeholder={''}>
-                    <ListItemPrefix placeholder={''}>
-                      <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                    </ListItemPrefix>
-                    Analytics
-                  </ListItem>
-                  <ListItem placeholder={''}>
-                    <ListItemPrefix placeholder={''}>
-                      <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                    </ListItemPrefix>
-                    Reporting
-                  </ListItem>
-                  <ListItem placeholder={''}>
-                    <ListItemPrefix placeholder={''}>
-                      <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
-                    </ListItemPrefix>
-                    Projects
-                  </ListItem>
+                  { lecciones.map(leccion => {
+                    return (<LessonItem name={leccion.nombre} />)
+                  })}
                 </List>
               </AccordionBody>
             </Accordion>

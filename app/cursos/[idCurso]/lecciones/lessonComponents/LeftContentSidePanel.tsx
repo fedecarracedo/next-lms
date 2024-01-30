@@ -23,32 +23,35 @@ import {
 } from "@heroicons/react/24/solid";
 import { ChevronRightIcon, ChevronDownIcon } from "@heroicons/react/24/outline";
 import '../../lessonStyles.css'
-import obtenerUnidadesCurso from "@/app/controllers/DatabaseController";
+import {obtenerUnidadesCurso, obtenerCursoPorId} from "@/app/controllers/DatabaseController";
 import Unidad from "@/app/model/Unidad";
 import LessonAccordion from "./LessonAccordion";
+import Curso from "@/app/model/Curso";
  
 export default function LeftContentSidePanel({ idCurso }: { idCurso: number }) {
   const [open, setOpen] = React.useState(0);
   const [unidades, setUnidades] = React.useState<Unidad[]>([])
+  const [curso, setCurso] = React.useState<Curso>()
   useEffect(() => {
     setUnidades(obtenerUnidadesCurso(idCurso))
+    setCurso(obtenerCursoPorId(idCurso))
   }, [])
   const handleOpen = (value: SetStateAction<number>) => {
     setOpen(open === value ? 0 : value);
   };
  
   return (
-    <Card placeholder={''} className="h-[calc(89vh)] w-full max-w-[20rem] p-4 shadow-xl shadow-blue-gray-900/5 LessonContent">
+    <Card placeholder={''} className=" w-full max-w-[20rem] p-4 shadow-xl shadow-blue-gray-900/5 LessonContent">
       <div className="mb-2 p-4">
         <Typography placeholder={''} variant="h5" color="blue-gray">
-          Tabla de contenidos curso {idCurso}
+          {curso?.nombre}
         </Typography>
         
       </div>
       <List placeholder={''}>
-        {unidades.map(unidad => {
+        {unidades.map((unidad, index) => {
             return (
-              <LessonAccordion open={open} handleOpen={handleOpen} unitId={unidad.id} description={unidad.nombre} />
+              <LessonAccordion open={open} handleOpen={handleOpen} unitId={index+1} description={unidad.nombre} lecciones={unidad.lecciones} />
             )
           })}
         <hr className="my-2 border-blue-gray-50" />
