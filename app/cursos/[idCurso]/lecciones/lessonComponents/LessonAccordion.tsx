@@ -15,7 +15,10 @@ import { ChevronRightIcon, ChevronDownIcon } from "@heroicons/react/24/outline";
 import Leccion from "@/app/model/Leccion";
 import LessonItem from "./LessonItem";
 
-export default function LessonAccordion({open, handleOpen, unitId, description, lecciones}: {open: number, handleOpen: any, unitId: number, description:string, lecciones: Leccion[]}) {
+export default function LessonAccordion({open, handleOpen, unitId, description, lecciones, lesson, setLesson}: {open: number, handleOpen: any, unitId: number, description:string, lecciones: Leccion[], lesson: number, setLesson: React.Dispatch<React.SetStateAction<number>>}) {
+    function handleLesson(lessonId: number) : void {
+      setLesson(lessonId)
+    }
     return(
         <Accordion placeholder={''}
               open={open === unitId}
@@ -39,7 +42,11 @@ export default function LessonAccordion({open, handleOpen, unitId, description, 
               <AccordionBody className="py-1">
                 <List placeholder={''} className="p-0">
                   { lecciones.map(leccion => {
-                    return (<LessonItem name={leccion.nombre} />)
+                    return (
+                    <div onClick={() => handleLesson(leccion.idLeccion)}>
+                      <LessonItem  name={leccion.nombre} />
+                    </div>
+                    )
                   })}
                 </List>
               </AccordionBody>

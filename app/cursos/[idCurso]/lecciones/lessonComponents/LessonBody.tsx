@@ -1,12 +1,20 @@
 'use client'
+import { useEffect } from 'react'
 import '../../lessonStyles.css'
+import { obtenerContenidoLeccion } from '@/app/controllers/DatabaseController'
 
-export default function LessonBody({content}: {content: string}) {
+export default function LessonBody({content, lesson}: {content: string, lesson: number}) {
+    let lessonContent: Document
+    useEffect(() => {
+        const parser = new DOMParser()
+        lessonContent = parser.parseFromString(obtenerContenidoLeccion(lesson), "text/html")
+    }, [lesson])
     return (
         <div className="LessonBody pt-8 pl-20 pr-20">
             <h2 className="block font-sans text-4xl antialiased font-semibold leading-tight tracking-normal text-inherit pb-5 pl-0">
                 Modelo Canva de negocios
             </h2>
+            {"<p> Hola </p>"}
             <p className="block font-sans text-lg antialiased font-normal leading-relaxed text-inherit text-justify">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis id facilis delectus illo, incidunt quidem itaque atque dolores nihil? A adipisci aliquid labore facere officia eveniet obcaecati iste ipsum consequatur!
             </p>

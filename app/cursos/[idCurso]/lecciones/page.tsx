@@ -1,3 +1,5 @@
+'use client'
+
 import LeftContentSidePanel from "./lessonComponents/LeftContentSidePanel";
 import LessonBody from "./lessonComponents/LessonBody";
 import LessonNavbar from "./lessonComponents/LessonNavbar";
@@ -11,8 +13,8 @@ export default function Lecciones({ params }: { params: { idCurso: number } }) {
     <div>
       <LessonNavbar />
       <div className={'lessonContainer'}>
-        <LeftContentSidePanel  idCurso={params.idCurso} />
-        <LessonBody content="" />
+        <LeftContentSidePanel lesson={lesson} setLesson={setLesson} idCurso={params.idCurso} />
+        <LessonBody lesson={lesson} content="" />
       </div>
     </div>
   );

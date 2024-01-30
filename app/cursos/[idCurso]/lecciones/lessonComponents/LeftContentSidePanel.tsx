@@ -28,7 +28,7 @@ import Unidad from "@/app/model/Unidad";
 import LessonAccordion from "./LessonAccordion";
 import Curso from "@/app/model/Curso";
  
-export default function LeftContentSidePanel({ idCurso }: { idCurso: number }) {
+export default function LeftContentSidePanel({ idCurso, lesson, setLesson }: { idCurso: number, lesson: number, setLesson: React.Dispatch<React.SetStateAction<number>> }) {
   const [open, setOpen] = React.useState(0);
   const [unidades, setUnidades] = React.useState<Unidad[]>([])
   const [curso, setCurso] = React.useState<Curso>()
@@ -51,7 +51,7 @@ export default function LeftContentSidePanel({ idCurso }: { idCurso: number }) {
       <List placeholder={''}>
         {unidades.map((unidad, index) => {
             return (
-              <LessonAccordion open={open} handleOpen={handleOpen} unitId={index+1} description={unidad.nombre} lecciones={unidad.lecciones} />
+              <LessonAccordion lesson={lesson} setLesson={setLesson} open={open} handleOpen={handleOpen} unitId={index+1} description={unidad.nombre} lecciones={unidad.lecciones} />
             )
           })}
         <hr className="my-2 border-blue-gray-50" />

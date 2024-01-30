@@ -9,6 +9,12 @@ function obtenerLeccionesUnidad(idUnidad: number): Leccion[] {
     return lecciones.filter(leccion => leccion.idUnidad === idUnidad).map(leccionUnidad => new Leccion(leccionUnidad.name, leccionUnidad.idUnidad, leccionUnidad.idLeccion, leccionUnidad.contenido))
 }
 
+export function obtenerContenidoLeccion(idLeccion: number): string {
+    let value: string | undefined = lecciones.find(leccion => leccion.idLeccion == idLeccion)?.contenido
+
+    return value ? value : ""
+}
+
 export function obtenerCursoPorId(idCurso: number): Curso {
     return cursos
     .filter((curso) => curso.id == idCurso)
