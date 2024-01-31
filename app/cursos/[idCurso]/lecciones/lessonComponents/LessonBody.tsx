@@ -12,7 +12,7 @@ export default function LessonBody({lesson}: {lesson: number}) {
     , [lesson])
 
     return (
-        <div className="LessonBody pt-8 pl-20 pr-20">
+        <div className="LessonBody">
             {lessonContent.map(elem => elem)}
             <div className='FillerBlock'>
 

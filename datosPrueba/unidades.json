@@ -33,5 +33,15 @@
         "idUnidad": 7,
         "idCurso": 2,
         "name": "Tu propio CV"
+    },
+    {
+        "idUnidad": 8,
+        "idCurso": 2,
+        "name": "Tu propio CV"
+    },
+    {
+        "idUnidad": 9,
+        "idCurso": 2,
+        "name": "Tu propio CV"
     }
 ]   

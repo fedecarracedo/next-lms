@@ -29,7 +29,7 @@ import {
           </Typography>
         </CardBody>
         <CardFooter placeholder={''} className="pt-0">
-          <Button onClick={() => router.push(`/cursos/${props.id}/lecciones?courseId=${props.id}`)} placeholder={''}>Read More</Button>
+          <Button onClick={() => router.push(`/cursos/${props.id}/lecciones`)} placeholder={''}>Read More</Button>
         </CardFooter>
       </Card>
     );

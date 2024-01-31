@@ -10,10 +10,15 @@
 
 .LessonBody {
     flex: 1;
+    margin-left: 20rem;
+    padding: 1.5rem 7rem;
 }
 
 .LessonContent {
-    flex: 1;
+    height: 88vh;
+    width: 20rem;
+    position: fixed;
+    overflow-y: scroll;
 }
 
 .LessonNavbar {
