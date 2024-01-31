@@ -41,3 +41,22 @@ export function obtenerUnidadesCurso(idCurso: number) {
         )
     return unidadesMap
 }
+
+export function queryDatabaseForUsers() {
+    var mysql = require('mysql');
+
+    var con = mysql.createConnection({
+        host: "localhost",
+        user: "base",
+        password: "base",
+        database: "next-usuarios"
+    });
+
+    con.connect(function(err: any) {
+        if (err) throw err;
+        con.query("SELECT * FROM usuario", function (err: any, result: any, fields: any) {
+          if (err) throw err;
+          console.log(result);
+        });
+    });
+}
