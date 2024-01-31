@@ -18,7 +18,10 @@ export default function parseEditorElement(blockElement: any): JSX.Element | und
         case "list":
             elemTag = blockElement.data.style == "unordered" ? 'ul' : 'ol'
             elemContent = blockElement.data.items.map((item: string) => React.createElement('li', {}, item))
-            elemProps = {className: elemTag == 'ul' ? 'max-w-md space-y-1 list-disc list-inside' : 'ps-5 mt-2 space-y-1 list-decimal list-inside'}
+            let classes: string = (elemTag == 'ul' ? 
+            'max-w-md space-y-1 list-disc list-inside' : 
+            'ps-5 mt-2 space-y-1 list-decimal list-inside')
+            elemProps = {className: classes}
             break
         default:
             elemTag = ''
@@ -27,9 +30,7 @@ export default function parseEditorElement(blockElement: any): JSX.Element | und
     }
 
     if(elemTag != '') {
-        console.log(elemTag)
         let ReactElement: JSX.Element = React.createElement(elemTag, elemProps, elemContent)
-        console.log(ReactElement)
         return ReactElement
     }
 

@@ -88,11 +88,13 @@
                 "id": "XV87kJS_H1",
                 "type": "list",
                 "data": {
-                   "style": "unordered",
+                   "style": "ordered",
                    "items": [
                       "It is a block-styled editor",
                       "It returns clean data output in JSON",
-                      "Designed to be extendable and pluggable with a simple API"
+                      "Designed to be extendable and pluggable with a simple API",
+                      "My god",
+                      "Dinamic Render"
                    ]
                 }
              },
@@ -152,7 +154,7 @@
                 "id": "XV87kJS_H1",
                 "type": "list",
                 "data": {
-                   "style": "ordered",
+                   "style": "asd",
                    "items": [
                       "It is a block-styled editor",
                       "It returns clean data output in JSON",
