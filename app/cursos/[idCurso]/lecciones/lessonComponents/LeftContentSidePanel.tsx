@@ -51,7 +51,7 @@ export default function LeftContentSidePanel({ idCurso, lesson, setLesson }: { i
       <List placeholder={''}>
         {unidades.map((unidad, index) => {
             return (
-              <LessonAccordion lesson={lesson} setLesson={setLesson} open={open} handleOpen={handleOpen} unitId={index+1} description={unidad.nombre} lecciones={unidad.lecciones} />
+              <LessonAccordion key={index} lesson={lesson} setLesson={setLesson} open={open} handleOpen={handleOpen} unitId={index+1} description={unidad.nombre} lecciones={unidad.lecciones} />
             )
           })}
         <hr className="my-2 border-blue-gray-50" />

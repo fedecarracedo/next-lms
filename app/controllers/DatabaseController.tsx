@@ -4,15 +4,19 @@ import * as cursos from '../../datosPrueba/cursos.json'
 import Unidad from '../model/Unidad'
 import Leccion from '../model/Leccion'
 import Curso from '../model/Curso'
+import parseEditorElement from './EditorParser'
 
 function obtenerLeccionesUnidad(idUnidad: number): Leccion[] {
-    return lecciones.filter(leccion => leccion.idUnidad === idUnidad).map(leccionUnidad => new Leccion(leccionUnidad.name, leccionUnidad.idUnidad, leccionUnidad.idLeccion, leccionUnidad.contenido))
+    return lecciones.filter(leccion => leccion.idUnidad === idUnidad).map(leccionUnidad => new Leccion(leccionUnidad.name, leccionUnidad.idUnidad, leccionUnidad.idLeccion,  <p></p>))
 }
 
-export function obtenerContenidoLeccion(idLeccion: number): string {
-    let value: string | undefined = lecciones.find(leccion => leccion.idLeccion == idLeccion)?.contenido
-
-    return value ? value : ""
+export function obtenerContenidoLeccion(idLeccion: number): JSX.Element[] {
+    let JSXContent : JSX.Element[] = []
+    lecciones.find(leccion => leccion.idLeccion == idLeccion)?.contenido.forEach(element => {
+        let reactElem: JSX.Element | undefined = parseEditorElement(element)
+        reactElem ? JSXContent.push(reactElem) : ""
+    })
+    return JSXContent
 }
 
 export function obtenerCursoPorId(idCurso: number): Curso {

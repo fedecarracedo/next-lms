@@ -1,20 +1,19 @@
 'use client'
-import { useEffect } from 'react'
+import React, { useEffect } from 'react'
 import '../../lessonStyles.css'
 import { obtenerContenidoLeccion } from '@/app/controllers/DatabaseController'
+import reactElementToJSXString from 'react-element-to-jsx-string'
 
 export default function LessonBody({content, lesson}: {content: string, lesson: number}) {
-    let lessonContent: Document
+    const [lessonContent, setLessonContent] = React.useState<JSX.Element[]>([])
     useEffect(() => {
-        const parser = new DOMParser()
-        lessonContent = parser.parseFromString(obtenerContenidoLeccion(lesson), "text/html")
-    }, [lesson])
+        setLessonContent(obtenerContenidoLeccion(2))
+    }, [])
     return (
         <div className="LessonBody pt-8 pl-20 pr-20">
             <h2 className="block font-sans text-4xl antialiased font-semibold leading-tight tracking-normal text-inherit pb-5 pl-0">
                 Modelo Canva de negocios
             </h2>
-            {"<p> Hola </p>"}
             <p className="block font-sans text-lg antialiased font-normal leading-relaxed text-inherit text-justify">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis id facilis delectus illo, incidunt quidem itaque atque dolores nihil? A adipisci aliquid labore facere officia eveniet obcaecati iste ipsum consequatur!
             </p>
@@ -24,10 +23,10 @@ export default function LessonBody({content, lesson}: {content: string, lesson: 
                     Your browser does not support the video tag.
                 </video>
             </div>
-            <p className="block font-sans text-lg antialiased font-normal leading-relaxed text-inherit mb-4 text-justify">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corrupti tenetur eum praesentium, quaerat dicta in labore, at velit doloremque quis, deleniti voluptatum laborum sapiente repellat. Voluptates perspiciatis est nihil harum!
-                Rerum dolor optio eius possimus harum quia veniam necessitatibus facilis autem quod, enim sequi a, nemo voluptate exercitationem voluptatibus dolore? Iste laudantium modi nostrum provident in, voluptatibus recusandae fuga aliquid!
-            </p>
+            {lessonContent.map(elem => elem)}
+            <div className='FillerBlock'>
+
+            </div>
         </div>
     )
 }

@@ -1,12 +1,12 @@
-import LessonBody from "../cursos/[idCurso]/lecciones/lessonComponents/LessonBody"
+
 
 export default class Leccion {
     nombre: string
     idLeccion: number
     idUnidad: number
-    contenido: string
+    contenido: JSX.Element
 
-    constructor(nombre: string, idUnidad: number, idLeccion: number, contenido:string) {
+    constructor(nombre: string, idUnidad: number, idLeccion: number, contenido:JSX.Element) {
         this.nombre = nombre
         this.idLeccion = idLeccion
         this.idUnidad = idUnidad

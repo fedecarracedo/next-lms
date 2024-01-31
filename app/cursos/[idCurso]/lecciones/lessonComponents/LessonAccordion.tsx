@@ -41,10 +41,10 @@ export default function LessonAccordion({open, handleOpen, unitId, description, 
               </ListItem>
               <AccordionBody className="py-1">
                 <List placeholder={''} className="p-0">
-                  { lecciones.map(leccion => {
+                  { lecciones.map((leccion, index) => {
                     return (
                     <div onClick={() => handleLesson(leccion.idLeccion)}>
-                      <LessonItem  name={leccion.nombre} />
+                      <LessonItem key={index} name={leccion.nombre} />
                     </div>
                     )
                   })}
