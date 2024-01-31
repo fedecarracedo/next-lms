@@ -14,7 +14,7 @@ export default function Lecciones({ params }: { params: { idCurso: number } }) {
       <LessonNavbar />
       <div className={'lessonContainer'}>
         <LeftContentSidePanel lesson={lesson} setLesson={setLesson} idCurso={params.idCurso} />
-        <LessonBody lesson={lesson} content="" />
+        <LessonBody lesson={lesson} />
       </div>
     </div>
   );
