@@ -1,12 +1,11 @@
-import Leccion from "./Leccion"
 
 export default class Unidad {
-    nombre: string
-    lecciones: Leccion[]
-    id: number
-    constructor(lecciones: Leccion[], nombre:string, id: number) {
-        this.lecciones = lecciones
-        this.nombre = nombre
-        this.id = id
+    unidad_nombre: string
+    unidad_curso: number
+    unidad_id: number
+    constructor(unidad_curso: number, unidad_nombre:string, unidad_id: number) {
+        this.unidad_curso = unidad_curso
+        this.unidad_nombre = unidad_nombre
+        this.unidad_id = unidad_id
     }
 }

@@ -1,15 +1,26 @@
-import * as unidades from '../../datosPrueba/unidades.json'
-import * as lecciones from '../../datosPrueba/lecciones.json'
-import * as cursos from '../../datosPrueba/cursos.json'
 import Unidad from '../model/Unidad'
 import Leccion from '../model/Leccion'
 import Curso from '../model/Curso'
-import parseEditorElement from './EditorParser'
 
-function obtenerLeccionesUnidad(idUnidad: number): Leccion[] {
-    return lecciones
-    .filter(leccion => leccion.idUnidad === idUnidad)
-    .map(leccionUnidad => new Leccion(leccionUnidad.name, leccionUnidad.idUnidad, leccionUnidad.idLeccion))
+export async function obtenerLeccionesUnidad(idUnidad: number): Promise<Leccion[]> {
+    try {
+        type BloqueRespuesta = {
+            leccion_id: number,
+            leccion_unidad: number,
+            leccion_nombre: string,
+            leccion_contenido: string
+        }
+        const response: BloqueRespuesta[] = await (fetch(`http://localhost:8080/leccion/obtenerLeccionesUnidad/${idUnidad}`))
+        .then((result) => {return result.json()})
+
+        const lecciones: Leccion[] = response.map((elem) => {
+            return new Leccion(elem.leccion_nombre, elem.leccion_unidad, elem.leccion_id, elem.leccion_contenido)
+        })
+        
+        return lecciones
+    } catch (error) {
+        throw(error)
+    }
 }
 
 export function obtenerContenidoLeccion(idLeccion: number) {
@@ -38,15 +49,53 @@ export async function obtenerCursosUsuario(idUsuario: number): Promise<Curso[]> 
 }
 
 
-export function obtenerUnidadesCurso(idCurso: number) {
-    let unidadesMap = unidades
-    .filter(unidad => unidad.idCurso == idCurso)
-    .map(unidadCurso => 
-        new Unidad(
-            obtenerLeccionesUnidad(unidadCurso.idUnidad), 
-            unidadCurso.name, 
-            unidadCurso.idUnidad
-            )
-        )
-    return unidadesMap
+export async function obtenerUnidadesCurso(idCurso: number): Promise<Unidad[]> {
+    type BloqueRespuesta = {
+        unidad_id: number,
+        unidad_curso: number,
+        unidad_nombre: string
+    }
+    const response: BloqueRespuesta[] = await (fetch(`http://localhost:8080/unidad/obtenerUnidadesCurso/${idCurso}`))
+        .then((result) => {return result.json()})
+    
+    const unidades: Unidad[] = response.map((elem) => {
+        return new Unidad(elem.unidad_curso, elem.unidad_nombre, elem.unidad_id)
+    })
+
+    return unidades
+}
+
+export async function obtenerCursoPorId(idCurso: number): Promise<Curso> {
+    type BloqueRespuesta = {
+        curso_descripcion: string,
+        curso_id: number,
+        curso_nombre: string
+    }
+
+    const response: BloqueRespuesta[] = await (fetch(`http://localhost:8080/curso/obtenerSegunId/${idCurso}`))
+    .then((result) => {return result.json()})
+
+    const cursos: Curso[] = response.map((elem) => {
+        return new Curso(elem.curso_nombre, elem.curso_id, elem.curso_descripcion)
+    })
+
+    return cursos[0]
+}
+
+export async function obtenerLeccionPorId(idLeccion: number): Promise<Leccion> {
+    type BloqueRespuesta = {
+        leccion_id: number,
+        leccion_unidad: number,
+        leccion_nombre: string,
+        leccion_contenido: string
+    }
+
+    const response: BloqueRespuesta[] = await (fetch(`http://localhost:8080/leccion/obtenerSegunId/${idLeccion}`))
+    .then((result) => {return result.json()})
+
+    const leccion: Leccion[] = response.map((elem) => {
+        return new Leccion(elem.leccion_nombre, elem.leccion_unidad, elem.leccion_id, elem.leccion_contenido)
+    })
+
+    return leccion[0]
 }

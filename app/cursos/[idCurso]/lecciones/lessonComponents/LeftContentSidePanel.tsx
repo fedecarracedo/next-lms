@@ -8,20 +8,14 @@ import {
   ListItem,
   ListItemPrefix,
   ListItemSuffix,
-  Chip,
-  Accordion,
-  AccordionHeader,
-  AccordionBody,
+  Chip
 } from "@material-tailwind/react";
 import {
-  PresentationChartBarIcon,
-  ShoppingBagIcon,
   UserCircleIcon,
   Cog6ToothIcon,
   InboxIcon,
   PowerIcon,
 } from "@heroicons/react/24/solid";
-import { ChevronRightIcon, ChevronDownIcon } from "@heroicons/react/24/outline";
 import '../../lessonStyles.css'
 import {obtenerUnidadesCurso, obtenerCursoPorId} from "@/app/controllers/DatabaseController";
 import Unidad from "@/app/model/Unidad";
@@ -32,9 +26,20 @@ export default function LeftContentSidePanel({ idCurso, lesson, setLesson }: { i
   const [open, setOpen] = React.useState(0);
   const [unidades, setUnidades] = React.useState<Unidad[]>([])
   const [curso, setCurso] = React.useState<Curso>()
+
+  async function establecerUnidades() {
+    const unidades: Unidad[] = await obtenerUnidadesCurso(idCurso)
+    setUnidades(unidades)
+  }
+
+  async function establecerCurso() {
+    const curso: Curso = await obtenerCursoPorId(idCurso)
+    setCurso(curso)
+  }
+
   useEffect(() => {
-    setUnidades(obtenerUnidadesCurso(idCurso))
-    setCurso(obtenerCursoPorId(idCurso))
+    establecerUnidades()
+    establecerCurso()
   }, [])
   const handleOpen = (value: SetStateAction<number>) => {
     setOpen(open === value ? 0 : value);
@@ -51,7 +56,7 @@ export default function LeftContentSidePanel({ idCurso, lesson, setLesson }: { i
       <List placeholder={''}>
         {unidades.map((unidad, index) => {
             return (
-              <LessonAccordion key={index} lesson={lesson} setLesson={setLesson} open={open} handleOpen={handleOpen} unitId={index+1} description={unidad.nombre} lecciones={unidad.lecciones} />
+              <LessonAccordion key={index} setLesson={setLesson} open={open} handleOpen={handleOpen} idUnidad={unidad.unidad_id} orden={index+1} description={unidad.unidad_nombre} />
             )
           })}
         <hr className="my-2 border-blue-gray-50" />
