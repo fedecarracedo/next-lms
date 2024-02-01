@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import React, { SetStateAction, useEffect } from "react";
 import {
@@ -8,7 +8,7 @@ import {
   ListItem,
   ListItemPrefix,
   ListItemSuffix,
-  Chip
+  Chip,
 } from "@material-tailwind/react";
 import {
   UserCircleIcon,
@@ -16,73 +16,100 @@ import {
   InboxIcon,
   PowerIcon,
 } from "@heroicons/react/24/solid";
-import '../../lessonStyles.css'
-import {obtenerUnidadesCurso, obtenerCursoPorId} from "@/app/controllers/DatabaseController";
+import "../../lessonStyles.css";
+import {
+  obtenerUnidadesCurso,
+  obtenerCursoPorId,
+} from "@/app/controllers/DatabaseController";
 import Unidad from "@/app/model/Unidad";
 import LessonAccordion from "./LessonAccordion";
 import Curso from "@/app/model/Curso";
- 
-export default function LeftContentSidePanel({ idCurso, lesson, setLesson }: { idCurso: number, lesson: number, setLesson: React.Dispatch<React.SetStateAction<number>> }) {
+
+export default function LeftContentSidePanel({
+  idCurso,
+  lesson,
+  setLesson,
+}: {
+  idCurso: number;
+  lesson: number;
+  setLesson: React.Dispatch<React.SetStateAction<number>>;
+}) {
   const [open, setOpen] = React.useState(0);
-  const [unidades, setUnidades] = React.useState<Unidad[]>([])
-  const [curso, setCurso] = React.useState<Curso>()
+  const [unidades, setUnidades] = React.useState<Unidad[]>([]);
+  const [curso, setCurso] = React.useState<Curso>();
 
   async function establecerUnidades() {
-    const unidades: Unidad[] = await obtenerUnidadesCurso(idCurso)
-    setUnidades(unidades)
+    const unidades: Unidad[] = await obtenerUnidadesCurso(idCurso);
+    setUnidades(unidades);
   }
 
   async function establecerCurso() {
-    const curso: Curso = await obtenerCursoPorId(idCurso)
-    setCurso(curso)
+    const curso: Curso = await obtenerCursoPorId(idCurso);
+    setCurso(curso);
   }
 
   useEffect(() => {
-    establecerUnidades()
-    establecerCurso()
-  }, [])
+    establecerUnidades();
+    establecerCurso();
+  }, []);
   const handleOpen = (value: SetStateAction<number>) => {
     setOpen(open === value ? 0 : value);
   };
- 
+
   return (
-    <Card placeholder={''} className=" w-full max-w-[20rem] p-4 shadow-xl shadow-blue-gray-900/5 LessonContent">
+    <Card
+      placeholder={""}
+      className=" w-full max-w-[20rem] p-4 shadow-xl shadow-blue-gray-900/5 LessonContent"
+    >
       <div className="mb-2 p-4">
-        <Typography placeholder={''} variant="h5" color="blue-gray">
+        <Typography placeholder={""} variant="h5" color="blue-gray">
           {curso?.nombre}
         </Typography>
-        
       </div>
-      <List placeholder={''}>
+      <List placeholder={""}>
         {unidades.map((unidad, index) => {
-            return (
-              <LessonAccordion key={index} setLesson={setLesson} open={open} handleOpen={handleOpen} idUnidad={unidad.unidad_id} orden={index+1} description={unidad.unidad_nombre} />
-            )
-          })}
+          return (
+            <LessonAccordion
+              key={index}
+              setLesson={setLesson}
+              open={open}
+              handleOpen={handleOpen}
+              idUnidad={unidad.unidad_id}
+              orden={index + 1}
+              description={unidad.unidad_nombre}
+            />
+          );
+        })}
         <hr className="my-2 border-blue-gray-50" />
-        <ListItem placeholder={''}>
-          <ListItemPrefix placeholder={''}>
+        <ListItem placeholder={""}>
+          <ListItemPrefix placeholder={""}>
             <InboxIcon className="h-5 w-5" />
           </ListItemPrefix>
           Inbox
-          <ListItemSuffix placeholder={''}>
-            <Chip value="14" size="sm" variant="ghost" color="blue-gray" className="rounded-full" />
+          <ListItemSuffix placeholder={""}>
+            <Chip
+              value="14"
+              size="sm"
+              variant="ghost"
+              color="blue-gray"
+              className="rounded-full"
+            />
           </ListItemSuffix>
         </ListItem>
-        <ListItem placeholder={''}>
-          <ListItemPrefix placeholder={''}>
+        <ListItem placeholder={""}>
+          <ListItemPrefix placeholder={""}>
             <UserCircleIcon className="h-5 w-5" />
           </ListItemPrefix>
           Profile
         </ListItem>
-        <ListItem placeholder={''}>
-          <ListItemPrefix placeholder={''}>
+        <ListItem placeholder={""}>
+          <ListItemPrefix placeholder={""}>
             <Cog6ToothIcon className="h-5 w-5" />
           </ListItemPrefix>
           Settings
         </ListItem>
-        <ListItem placeholder={''}>
-          <ListItemPrefix placeholder={''}>
+        <ListItem placeholder={""}>
+          <ListItemPrefix placeholder={""}>
             <PowerIcon className="h-5 w-5" />
           </ListItemPrefix>
           Log Out

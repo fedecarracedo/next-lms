@@ -23,9 +23,6 @@ export async function obtenerLeccionesUnidad(idUnidad: number): Promise<Leccion[
     }
 }
 
-export function obtenerContenidoLeccion(idLeccion: number) {
-}
-
 export async function obtenerCursosUsuario(idUsuario: number): Promise<Curso[]> {
     try {
         type BloqueRespuesta = {

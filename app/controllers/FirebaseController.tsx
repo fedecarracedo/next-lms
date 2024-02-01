@@ -1,8 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { FirebaseApp, initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-import { getAuth, createUserWithEmailAndPassword, Auth } from "firebase/auth";
-import { useCookies } from 'react-cookie';
+import { getAuth, Auth } from "firebase/auth";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -15,10 +13,10 @@ const firebaseConfig = {
   storageBucket: "next-lms-c2720.appspot.com",
   messagingSenderId: "288250739359",
   appId: "1:288250739359:web:3514972d4b71fc6f4240aa",
-  measurementId: "G-J0TMH1M0YQ"
+  measurementId: "G-J0TMH1M0YQ",
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-export const auth: Auth = getAuth()
+export const auth: Auth = getAuth();

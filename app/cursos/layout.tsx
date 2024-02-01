@@ -13,9 +13,5 @@ export default function CursosLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
-    <div>
-        {children}
-    </div>
-  );
+  return <div>{children}</div>;
 }
