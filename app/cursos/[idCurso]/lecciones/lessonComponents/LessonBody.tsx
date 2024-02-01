@@ -5,7 +5,7 @@ import { obtenerContenidoLeccion, obtenerLeccionPorId } from '@/app/controllers/
 import Leccion from '@/app/model/Leccion'
 import parseEditorElement from '@/app/controllers/EditorParser'
 
-export default function LessonBody({lesson}: {lesson: number, contenido: string}) {
+export default function LessonBody({lesson}: {lesson: number}) {
     const [lessonContent, setLessonContent] = React.useState<JSX.Element[]>([])
 
     async function obtenerContenidoLeccion() {
