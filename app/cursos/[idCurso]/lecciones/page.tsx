@@ -3,7 +3,7 @@
 import LeftContentSidePanel from "./lessonComponents/LeftContentSidePanel";
 import LessonBody from "./lessonComponents/LessonBody";
 import LessonNavbar from "./lessonComponents/LessonNavbar";
-import React, { SetStateAction, useEffect } from "react";
+import React from "react";
 
 export default function Lecciones({ params }: { params: { idCurso: number } }) {
   const [lesson, setLesson] = React.useState(0);
