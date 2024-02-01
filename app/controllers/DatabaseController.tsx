@@ -12,22 +12,31 @@ function obtenerLeccionesUnidad(idUnidad: number): Leccion[] {
     .map(leccionUnidad => new Leccion(leccionUnidad.name, leccionUnidad.idUnidad, leccionUnidad.idLeccion))
 }
 
-export function obtenerContenidoLeccion(idLeccion: number): JSX.Element[] {
-    let JSXContent : JSX.Element[] = []
-    lecciones
-    .find(leccion => leccion.idLeccion == idLeccion)?.contenido
-    .forEach(element => {
-        let reactElem: JSX.Element | undefined = parseEditorElement(element)
-        reactElem ? JSXContent.push(reactElem) : ""
-    })
-    return JSXContent
+export function obtenerContenidoLeccion(idLeccion: number) {
 }
 
-export function obtenerCursoPorId(idCurso: number): Curso {
-    return cursos
-    .filter((curso) => curso.id == idCurso)
-    .map(cursoFiltrado => new Curso(cursoFiltrado.name, cursoFiltrado.id, cursoFiltrado.description))[0]
+export async function obtenerCursosUsuario(idUsuario: number): Promise<Curso[]> {
+    try {
+        type BloqueRespuesta = {
+            curso_descripcion: string,
+            curso_id: number,
+            curso_nombre: string,
+            usuario_curso_curso: number,
+            usuario_curso_usuario: number
+        }
+        const response: BloqueRespuesta[] = await (fetch(`http://localhost:8080/usuario_curso/obtenerCursosUsuario/${idUsuario}`))
+        .then((result) => {return result.json()})
+
+        const cursos: Curso[] = response.map((elem) => {
+            return new Curso(elem.curso_nombre, elem.curso_id, elem.curso_descripcion)
+        })
+        
+        return cursos
+    } catch (error) {
+        throw(error)
+    }
 }
+
 
 export function obtenerUnidadesCurso(idCurso: number) {
     let unidadesMap = unidades
@@ -40,23 +49,4 @@ export function obtenerUnidadesCurso(idCurso: number) {
             )
         )
     return unidadesMap
-}
-
-export function queryDatabaseForUsers() {
-    var mysql = require('mysql');
-
-    var con = mysql.createConnection({
-        host: "localhost",
-        user: "base",
-        password: "base",
-        database: "next-usuarios"
-    });
-
-    con.connect(function(err: any) {
-        if (err) throw err;
-        con.query("SELECT * FROM usuario", function (err: any, result: any, fields: any) {
-          if (err) throw err;
-          console.log(result);
-        });
-    });
 }

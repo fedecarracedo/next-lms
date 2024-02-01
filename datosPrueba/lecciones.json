@@ -3,7 +3,7 @@
         "idLeccion": 1,
         "idUnidad": 1,
         "name": "Negociacion y oratoria",
-        "contenido": [
+        "contenido": { "elementos": [
             {
                 "id": "oUq2g_tl8y",
                 "type": "header",
@@ -54,7 +54,7 @@
                    "text": "Workspace in classic editors is made of a single contenteditable element, used to create different HTML markups. Editor.js <mark class=\"cdx-marker\">workspace consists of separate Blocks: paragraphs, headings, images, lists, quotes, etc</mark>. Each of them is an independent contenteditable element (or more complex structure) provided by Plugin and united by Editor's Core."
                 }
              }
-        ]
+        ]}
     },
     {
         "idLeccion": 2,
