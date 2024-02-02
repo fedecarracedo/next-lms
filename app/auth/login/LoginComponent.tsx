@@ -30,7 +30,7 @@ export default function LoginComponent() {
           email
         );
         localStorage.setItem("usuarioId", usuario.usuario_id);
-        console.log(usuario.usuario_id);
+        router.push("/")
       }
     );
   }
@@ -47,7 +47,7 @@ export default function LoginComponent() {
       <Typography placeholder={""} color="gray" className="mt-1 font-normal">
         Welcome back! We missed you.
       </Typography>
-      <form className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96">
+      <form onSubmit={handleLogin} className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96">
         <div className="mb-1 flex flex-col gap-6">
           <Typography
             placeholder={""}
@@ -65,12 +65,14 @@ export default function LoginComponent() {
             labelProps={{
               className: "before:content-none after:content-none",
             }}
+            onChange={(e) => setEmail(e.target.value)}
           />
           <Typography
             placeholder={""}
             variant="h6"
             color="blue-gray"
             className="-mb-3"
+            
           >
             Password
           </Typography>
@@ -83,6 +85,7 @@ export default function LoginComponent() {
             labelProps={{
               className: "before:content-none after:content-none",
             }}
+            onChange={(e) => setPassword(e.target.value)}
           />
         </div>
         <Checkbox
@@ -99,7 +102,7 @@ export default function LoginComponent() {
           }
           containerProps={{ className: "-ml-2.5" }}
         />
-        <Button placeholder={""} className="mt-6" fullWidth>
+        <Button type="submit" placeholder={""} className="mt-6" fullWidth>
           login
         </Button>
         <Typography
