@@ -1,5 +1,7 @@
 "use client";
 
+import { obtenerRegistroPorCampo } from "@/app/controllers/DatabaseController";
+import { auth } from "@/app/controllers/FirebaseController";
 import {
   Card,
   Input,
@@ -7,11 +9,31 @@ import {
   Button,
   Typography,
 } from "@material-tailwind/react";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function LoginComponent() {
   const router = useRouter();
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  async function handleLogin(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    signInWithEmailAndPassword(auth, email, password).then(
+      async (userCredentials) => {
+        localStorage.setItem("userEmail", email);
+        const usuario = await obtenerRegistroPorCampo(
+          "usuario",
+          "usuario_email",
+          email
+        );
+        localStorage.setItem("usuarioId", usuario.usuario_id);
+        console.log(usuario.usuario_id);
+      }
+    );
+  }
 
   useEffect(() => {
     if (localStorage.getItem("userEmail")) router.push("/");
