@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import AuthStudentValidator from "../components/AuthStudentValidator";
 
 export const metadata: Metadata = {
   title: "Cursos",
@@ -10,5 +11,10 @@ export default function CursosLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return <div>{children}</div>;
+  return (
+    <div>
+      <AuthStudentValidator />
+      {children}
+    </div>
+  );
 }

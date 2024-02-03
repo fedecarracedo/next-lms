@@ -26,6 +26,7 @@ export async function autenticarUsuario(
         surname: usuario.usuario_apellido,
         email: usuario.usuario_email,
         id: usuario.usuario_id,
+        tipo: usuario.usuario_tipo,
       });
       return userDataString;
     }

@@ -175,14 +175,33 @@ export async function registrarUsuario(
   tipo: TipoUsuario
 ): Promise<number | undefined> {
   try {
+    let tipoString: string;
     const claveEncriptada = await encryptPassword(clave);
+    switch (tipo) {
+      case 0:
+        tipoString = "Estudiante";
+        break;
+      case 1:
+        tipoString = "Observador";
+        break;
+      case 2:
+        tipoString = "Editor";
+        break;
+      case 3:
+        tipoString = "Administrador";
+        break;
+      default:
+        tipoString = "Estudiante";
+        break;
+    }
     const payload = JSON.stringify({
       nombre: nombre,
       apellido: apellido,
       email: email,
       clave: claveEncriptada,
-      tipo: tipo,
+      tipo: tipoString,
     });
+    console.log(payload);
     const response: OkPacket | undefined = await makePOSTRequestToApi(
       `/usuario/registrarUsuario`,
       payload

@@ -42,6 +42,7 @@ export default function SingnupComponent() {
           surname: surnameInputRef.current.value,
           email: emailInputRef.current.value,
           id: idNuevoUsuario,
+          tipo: TipoUsuario.Estudiante,
         });
 
         localStorage.setItem("userData", userDataString);
