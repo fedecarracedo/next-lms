@@ -38,14 +38,14 @@ export default function SingnupComponent() {
         TipoUsuario.Estudiante
       );
 
-      let userDataString = JSON.stringify({
-        name: nameInputRef.current.value,
-        surname: surnameInputRef.current.value,
-        email: emailInputRef.current.value,
-        id: idNuevoUsuario,
-      });
-
       if (idNuevoUsuario) {
+        let userDataString = JSON.stringify({
+          name: nameInputRef.current.value,
+          surname: surnameInputRef.current.value,
+          email: emailInputRef.current.value,
+          id: idNuevoUsuario,
+        });
+
         localStorage.setItem("userData", userDataString);
         router.push("/");
       }
