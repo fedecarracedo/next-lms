@@ -1,0 +1,9 @@
+POST http://localhost:8080/usuario/registrarUsuario
+Content-Type: application/json
+
+{
+    "nombre":"Admin",
+"apellido":"Prueba3",
+"email":"fede@admin.com",
+"clave":"$2a$10$iUY0XN2.in2A9oyZLvOrAOVaemcvQ1Z/Txv.FbDvdmn7OGSc1JylG","tipo":"Administrador"
+}

@@ -201,7 +201,6 @@ export async function registrarUsuario(
       clave: claveEncriptada,
       tipo: tipoString,
     });
-    console.log(payload);
     const response: OkPacket | undefined = await makePOSTRequestToApi(
       `/usuario/registrarUsuario`,
       payload

@@ -3,6 +3,7 @@
 import { UserData } from "@/app/model/UserData";
 import { useRouter } from "next/navigation";
 import { useEffect, useLayoutEffect } from "react";
+import AdminSidebar from "./components/AdminSidebar";
 
 export default function AdminPanel() {
   const router = useRouter();
@@ -14,6 +15,7 @@ export default function AdminPanel() {
   }, []);
   return (
     <div>
+      <AdminSidebar />
       <h1>Bienvenido</h1>
     </div>
   );
