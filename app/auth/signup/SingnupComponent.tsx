@@ -1,6 +1,5 @@
 "use client";
 
-import { encryptPassword } from "@/app/controllers/AuthController";
 import { registrarUsuario } from "@/app/controllers/DatabaseController";
 import { TipoUsuario } from "@/app/model/UsuarioTipo";
 import {
