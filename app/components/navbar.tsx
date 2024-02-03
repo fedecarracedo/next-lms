@@ -3,6 +3,7 @@
 import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/solid";
+import { obtenerRegistroPorCampo } from "../controllers/DatabaseController";
 
 const navigation = [
   { name: "Dashboard", href: "/", current: false },
@@ -15,7 +16,7 @@ function classNames(...classes: any[]) {
 }
 
 export default function Navbar() {
-  function handleSignout() {
+  async function handleSignout() {
     localStorage.removeItem("userEmail");
     localStorage.removeItem("userId");
   }

@@ -1,6 +1,8 @@
 "use client";
 
-import { auth } from "@/app/controllers/FirebaseController";
+import { encryptPassword } from "@/app/controllers/AuthController";
+import { registrarUsuario } from "@/app/controllers/DatabaseController";
+import { TipoUsuario } from "@/app/model/UsuarioTipo";
 import {
   Card,
   Input,
@@ -8,29 +10,43 @@ import {
   Button,
   Typography,
 } from "@material-tailwind/react";
-import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef } from "react";
 
 export default function SingnupComponent() {
   const router = useRouter();
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const nameInputRef = useRef<HTMLInputElement>(null);
+  const surnameInputRef = useRef<HTMLInputElement>(null);
+  const emailInputRef = useRef<HTMLInputElement>(null);
+  const passwordInputRef = useRef<HTMLInputElement>(null);
 
-  function handleSignUp(e: React.FormEvent<HTMLFormElement>): void {
+  async function handleSignUp(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        const saveValue: string = "" + userCredential.user.email;
-        localStorage.setItem("userEmail", saveValue);
+    if (
+      nameInputRef.current?.value &&
+      surnameInputRef.current?.value &&
+      emailInputRef.current?.value &&
+      passwordInputRef.current?.value
+    ) {
+      let encrypted = await encryptPassword(passwordInputRef.current.value);
+      let idNuevoUsuario: number | undefined = await registrarUsuario(
+        nameInputRef.current.value,
+        surnameInputRef.current.value,
+        emailInputRef.current.value,
+        encrypted,
+        TipoUsuario.Estudiante
+      );
+      if (idNuevoUsuario) {
+        localStorage.setItem("userEmail", emailInputRef.current.value);
+        localStorage.setItem("userId", idNuevoUsuario.toString());
         router.push("/");
-      })
-      .catch((error) => console.log(error.message));
+      }
+    }
   }
 
   useEffect(() => {
-    if (localStorage.getItem("userEmail")) router.push("/");
+    // if (localStorage.getItem("userEmail")) router.push("/");
   });
 
   return (
@@ -57,12 +73,32 @@ export default function SingnupComponent() {
           <Input
             crossOrigin={""}
             size="lg"
-            placeholder="John Doe"
+            placeholder="John"
             className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
             labelProps={{
               className: "before:content-none after:content-none",
             }}
             required={true}
+            inputRef={nameInputRef}
+          />
+          <Typography
+            placeholder={""}
+            variant="h6"
+            color="blue-gray"
+            className="-mb-3"
+          >
+            Your second name
+          </Typography>
+          <Input
+            crossOrigin={""}
+            size="lg"
+            placeholder="Doe"
+            className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
+            labelProps={{
+              className: "before:content-none after:content-none",
+            }}
+            required={true}
+            inputRef={surnameInputRef}
           />
           <Typography
             placeholder={""}
@@ -81,8 +117,8 @@ export default function SingnupComponent() {
             labelProps={{
               className: "before:content-none after:content-none",
             }}
-            onChange={(e) => setEmail(e.target.value)}
             required={true}
+            inputRef={emailInputRef}
           />
           <Typography
             placeholder={""}
@@ -101,7 +137,7 @@ export default function SingnupComponent() {
             labelProps={{
               className: "before:content-none after:content-none",
             }}
-            onChange={(e) => setPassword(e.target.value)}
+            inputRef={passwordInputRef}
             required={true}
           />
         </div>

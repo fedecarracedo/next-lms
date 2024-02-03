@@ -9,8 +9,6 @@ export default function Home() {
   const router = useRouter();
   useEffect(() => {
     let userEmail: string | null = localStorage.getItem("userEmail");
-    let localUser: string = "" + localStorage.getItem("userEmail");
-    localStorage.removeItem("userEmail");
     if (!userEmail) router.push("/auth/login");
   }, []);
 

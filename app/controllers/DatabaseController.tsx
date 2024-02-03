@@ -1,6 +1,38 @@
 import Unidad from "../model/Unidad";
 import Leccion from "../model/Leccion";
 import Curso from "../model/Curso";
+import { TipoUsuario } from "../model/UsuarioTipo";
+import { OkPacket } from "../model/MySQLResponse";
+
+async function makeGETRequestToApi(ruta: string): Promise<any[]> {
+  try {
+    const response = await fetch("http://localhost:8080" + ruta).then(
+      (result) => {
+        return result.json();
+      }
+    );
+    return response;
+  } catch (error) {
+    throw error;
+  }
+}
+
+async function makePOSTRequestToApi(
+  ruta: string,
+  payload: any
+): Promise<OkPacket | undefined> {
+  try {
+    const response = await fetch("http://localhost:8080" + ruta, {
+      method: "POST",
+      body: payload,
+    }).then((result) => {
+      return result.json();
+    });
+    return response;
+  } catch (error) {
+    throw error;
+  }
+}
 
 export async function obtenerLeccionesUnidad(
   idUnidad: number
@@ -12,11 +44,9 @@ export async function obtenerLeccionesUnidad(
       leccion_nombre: string;
       leccion_contenido: string;
     };
-    const response: BloqueRespuesta[] = await fetch(
-      `http://localhost:8080/leccion/obtenerLeccionesUnidad/${idUnidad}`
-    ).then((result) => {
-      return result.json();
-    });
+    const response: BloqueRespuesta[] = await makeGETRequestToApi(
+      `/leccion/obtenerLeccionesUnidad/${idUnidad}`
+    );
 
     const lecciones: Leccion[] = response.map((elem) => {
       return new Leccion(
@@ -44,14 +74,9 @@ export async function obtenerCursosUsuario(
       usuario_curso_curso: number;
       usuario_curso_usuario: number;
     };
-    console.log(idUsuario);
-    const response: BloqueRespuesta[] = await fetch(
-      `http://localhost:8080/usuario_curso/obtenerCursosUsuario/${idUsuario}`
-    )
-      .then((result) => {
-        return result.json();
-      })
-      .catch((err) => console.log(err));
+    const response: BloqueRespuesta[] = await makeGETRequestToApi(
+      `/usuario_curso/obtenerCursosUsuario/${idUsuario}`
+    );
 
     const cursos: Curso[] = response.map((elem) => {
       return new Curso(
@@ -73,11 +98,9 @@ export async function obtenerUnidadesCurso(idCurso: number): Promise<Unidad[]> {
     unidad_curso: number;
     unidad_nombre: string;
   };
-  const response: BloqueRespuesta[] = await fetch(
-    `http://localhost:8080/unidad/obtenerUnidadesCurso/${idCurso}`
-  ).then((result) => {
-    return result.json();
-  });
+  const response: BloqueRespuesta[] = await makeGETRequestToApi(
+    `/unidad/obtenerUnidadesCurso/${idCurso}`
+  );
 
   const unidades: Unidad[] = response.map((elem) => {
     return new Unidad(elem.unidad_curso, elem.unidad_nombre, elem.unidad_id);
@@ -93,11 +116,9 @@ export async function obtenerCursoPorId(idCurso: number): Promise<Curso> {
     curso_nombre: string;
   };
 
-  const response: BloqueRespuesta[] = await fetch(
-    `http://localhost:8080/curso/obtenerSegunId/${idCurso}`
-  ).then((result) => {
-    return result.json();
-  });
+  const response: BloqueRespuesta[] = await makeGETRequestToApi(
+    `/curso/obtenerSegunId/${idCurso}`
+  );
 
   const cursos: Curso[] = response.map((elem) => {
     return new Curso(elem.curso_nombre, elem.curso_id, elem.curso_descripcion);
@@ -114,11 +135,9 @@ export async function obtenerLeccionPorId(idLeccion: number): Promise<Leccion> {
     leccion_contenido: string;
   };
 
-  const response: BloqueRespuesta[] = await fetch(
-    `http://localhost:8080/leccion/obtenerSegunId/${idLeccion}`
-  ).then((result) => {
-    return result.json();
-  });
+  const response: BloqueRespuesta[] = await makeGETRequestToApi(
+    `/leccion/obtenerSegunId/${idLeccion}`
+  );
 
   const leccion: Leccion[] = response.map((elem) => {
     return new Leccion(
@@ -137,11 +156,35 @@ export async function obtenerRegistroPorCampo(
   campo: string,
   valor: string
 ) {
-  const response: any[] = await fetch(
-    `http://localhost:8080/${tabla}/getRecordUsing/${campo}/${valor}`
-  ).then((result) => {
-    return result.json();
-  });
+  const response: any[] = await makeGETRequestToApi(
+    `/${tabla}/getRecordUsing/${campo}/${valor}`
+  );
 
   return response[0];
+}
+
+export async function registrarUsuario(
+  nombre: string,
+  apellido: string,
+  email: string,
+  clave: string,
+  tipo: TipoUsuario
+): Promise<number | undefined> {
+  try {
+    const payload = JSON.stringify({
+      nombre: nombre,
+      apellido: apellido,
+      email: email,
+      clave: clave,
+      tipo: tipo,
+    });
+    const response: OkPacket | undefined = await makePOSTRequestToApi(
+      `/usuario/registrarUsuario`,
+      payload
+    );
+
+    if (response) return response.fieldCount;
+  } catch (error) {
+    throw error;
+  }
 }

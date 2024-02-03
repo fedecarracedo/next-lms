@@ -28,9 +28,15 @@ export default function LoginComponent() {
           "usuario",
           "usuario_email",
           email
-        );
-        localStorage.setItem("usuarioId", usuario.usuario_id);
-        router.push("/")
+        )
+          .then((usuario) => {
+            localStorage.setItem("usuarioId", usuario.usuario_id);
+            console.log(localStorage.getItem("userEmail"));
+            router.push("/");
+          })
+          .catch((err) => {
+            console.log("Usuario no encontrado.");
+          });
       }
     );
   }
@@ -47,7 +53,10 @@ export default function LoginComponent() {
       <Typography placeholder={""} color="gray" className="mt-1 font-normal">
         Welcome back! We missed you.
       </Typography>
-      <form onSubmit={handleLogin} className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96">
+      <form
+        onSubmit={handleLogin}
+        className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96"
+      >
         <div className="mb-1 flex flex-col gap-6">
           <Typography
             placeholder={""}
@@ -72,7 +81,6 @@ export default function LoginComponent() {
             variant="h6"
             color="blue-gray"
             className="-mb-3"
-            
           >
             Password
           </Typography>
