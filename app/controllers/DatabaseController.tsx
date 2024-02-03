@@ -211,3 +211,8 @@ export async function registrarUsuario(
     throw error;
   }
 }
+
+export async function obtenerTodos(tabla: string) {
+  const response = await makeGETRequestToApi(`/${tabla}/obtenerTodos`);
+  return response;
+}

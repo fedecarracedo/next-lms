@@ -4,6 +4,9 @@ import { UserData } from "@/app/model/UserData";
 import { useRouter } from "next/navigation";
 import { useEffect, useLayoutEffect } from "react";
 import AdminSidebar from "./components/AdminSidebar";
+import AdminBody from "./components/AdminBody";
+
+import "./adminPanelStyles.css";
 
 export default function AdminPanel() {
   const router = useRouter();
@@ -14,9 +17,9 @@ export default function AdminPanel() {
     if (userData.tipo == 0) router.push("/");
   }, []);
   return (
-    <div>
+    <div className="AdminPanelContainer">
       <AdminSidebar />
-      <h1>Bienvenido</h1>
+      <AdminBody />
     </div>
   );
 }

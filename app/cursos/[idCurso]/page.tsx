@@ -1,4 +1,3 @@
-import AuthStudentValidator from "@/app/components/AuthStudentValidator";
 import "../../globals.css";
 
 export default function CursoParticular({
@@ -8,7 +7,6 @@ export default function CursoParticular({
 }) {
   return (
     <div>
-      <AuthStudentValidator />
       <h1>Pagina de curso particular {params.idCurso}</h1>
     </div>
   );
