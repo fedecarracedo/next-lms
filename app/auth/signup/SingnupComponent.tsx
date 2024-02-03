@@ -29,12 +29,11 @@ export default function SingnupComponent() {
       emailInputRef.current?.value &&
       passwordInputRef.current?.value
     ) {
-      let encrypted = await encryptPassword(passwordInputRef.current.value);
       let idNuevoUsuario: number | undefined = await registrarUsuario(
         nameInputRef.current.value,
         surnameInputRef.current.value,
         emailInputRef.current.value,
-        encrypted,
+        passwordInputRef.current.value,
         TipoUsuario.Estudiante
       );
 

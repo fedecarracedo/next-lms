@@ -3,6 +3,8 @@ import Leccion from "../model/Leccion";
 import Curso from "../model/Curso";
 import { TipoUsuario } from "../model/UsuarioTipo";
 import { OkPacket } from "../model/MySQLResponse";
+import { encryptPassword } from "./AuthController";
+const bcrypt = require("bcryptjs");
 
 async function makeGETRequestToApi(ruta: string): Promise<any[]> {
   try {
@@ -173,11 +175,12 @@ export async function registrarUsuario(
   tipo: TipoUsuario
 ): Promise<number | undefined> {
   try {
+    const claveEncriptada = await encryptPassword(clave);
     const payload = JSON.stringify({
       nombre: nombre,
       apellido: apellido,
       email: email,
-      clave: clave,
+      clave: claveEncriptada,
       tipo: tipo,
     });
     const response: OkPacket | undefined = await makePOSTRequestToApi(
