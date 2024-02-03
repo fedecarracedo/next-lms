@@ -24,7 +24,7 @@ export default function Cursos() {
 
   useEffect(() => {
     obtenerCursos();
-  }, []);
+  }, [cursos]);
 
   return (
     <div>

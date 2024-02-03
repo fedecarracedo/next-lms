@@ -45,7 +45,7 @@ export async function obtenerLeccionesUnidad(
       leccion_contenido: string;
     };
     const response: BloqueRespuesta[] = await makeGETRequestToApi(
-      `/leccion/obtenerLeccionesUnidad/${idUnidad}`
+      `/leccion/getRecordUsing/leccion_unidad/${idUnidad}`
     );
 
     const lecciones: Leccion[] = response.map((elem) => {
@@ -78,15 +78,17 @@ export async function obtenerCursosUsuario(
       `/usuario_curso/obtenerCursosUsuario/${idUsuario}`
     );
 
-    const cursos: Curso[] = response.map((elem) => {
-      return new Curso(
-        elem.curso_nombre,
-        elem.curso_id,
-        elem.curso_descripcion
-      );
-    });
-
-    return cursos;
+    if (response.length > 0) {
+      const cursos: Curso[] = response.map((elem) => {
+        return new Curso(
+          elem.curso_nombre,
+          elem.curso_id,
+          elem.curso_descripcion
+        );
+      });
+      return cursos;
+    }
+    return [];
   } catch (error) {
     throw error;
   }
@@ -99,7 +101,7 @@ export async function obtenerUnidadesCurso(idCurso: number): Promise<Unidad[]> {
     unidad_nombre: string;
   };
   const response: BloqueRespuesta[] = await makeGETRequestToApi(
-    `/unidad/obtenerUnidadesCurso/${idCurso}`
+    `/unidad/getRecordUsing/unidad_curso/${idCurso}`
   );
 
   const unidades: Unidad[] = response.map((elem) => {
