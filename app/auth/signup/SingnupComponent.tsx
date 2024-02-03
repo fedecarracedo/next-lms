@@ -37,16 +37,23 @@ export default function SingnupComponent() {
         encrypted,
         TipoUsuario.Estudiante
       );
+
+      let userDataString = JSON.stringify({
+        name: nameInputRef.current.value,
+        surname: surnameInputRef.current.value,
+        email: emailInputRef.current.value,
+        id: idNuevoUsuario,
+      });
+
       if (idNuevoUsuario) {
-        localStorage.setItem("userEmail", emailInputRef.current.value);
-        localStorage.setItem("userId", idNuevoUsuario.toString());
+        localStorage.setItem("userData", userDataString);
         router.push("/");
       }
     }
   }
 
   useEffect(() => {
-    // if (localStorage.getItem("userEmail")) router.push("/");
+    if (localStorage.getItem("userData")) router.push("/");
   });
 
   return (

@@ -12,8 +12,9 @@ export default function Cursos() {
   const [cursos, setCursos] = useState<Curso[]>([]);
 
   async function obtenerCursos() {
-    const idUsuario: string | null = localStorage.getItem("idUsuario");
-    if (idUsuario) {
+    const userData: string | null = localStorage.getItem("userData");
+    if (userData) {
+      const idUsuario: any = JSON.parse(userData).id;
       const cursosUsuario: Curso[] = await obtenerCursosUsuario(
         parseInt(idUsuario)
       );

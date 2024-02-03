@@ -1,7 +1,6 @@
 "use client";
 
-import { obtenerRegistroPorCampo } from "@/app/controllers/DatabaseController";
-import { auth } from "@/app/controllers/FirebaseController";
+import { autenticarUsuario } from "@/app/controllers/AuthController";
 import {
   Card,
   Input,
@@ -9,40 +8,32 @@ import {
   Button,
   Typography,
 } from "@material-tailwind/react";
-import { signInWithEmailAndPassword } from "firebase/auth";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef } from "react";
 
 export default function LoginComponent() {
   const router = useRouter();
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const emailInputRef = useRef<HTMLInputElement>(null);
+  const passwordInputRef = useRef<HTMLInputElement>(null);
 
   async function handleLogin(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    signInWithEmailAndPassword(auth, email, password).then(
-      async (userCredentials) => {
-        localStorage.setItem("userEmail", email);
-        const usuario = await obtenerRegistroPorCampo(
-          "usuario",
-          "usuario_email",
-          email
-        )
-          .then((usuario) => {
-            localStorage.setItem("usuarioId", usuario.usuario_id);
-            console.log(localStorage.getItem("userEmail"));
-            router.push("/");
-          })
-          .catch((err) => {
-            console.log("Usuario no encontrado.");
-          });
+    if (emailInputRef.current?.value && passwordInputRef.current?.value) {
+      let usuarioValido: string | undefined = await autenticarUsuario(
+        emailInputRef.current.value,
+        passwordInputRef.current.value
+      );
+      if (usuarioValido) {
+        localStorage.setItem("userData", usuarioValido);
+        router.push("/");
       }
-    );
+    }
   }
 
   useEffect(() => {
-    if (localStorage.getItem("userEmail")) router.push("/");
+    let userData: string | null = localStorage.getItem("userData");
+    if (userData) router.push("/");
   });
 
   return (
@@ -74,7 +65,7 @@ export default function LoginComponent() {
             labelProps={{
               className: "before:content-none after:content-none",
             }}
-            onChange={(e) => setEmail(e.target.value)}
+            inputRef={emailInputRef}
           />
           <Typography
             placeholder={""}
@@ -93,7 +84,7 @@ export default function LoginComponent() {
             labelProps={{
               className: "before:content-none after:content-none",
             }}
-            onChange={(e) => setPassword(e.target.value)}
+            inputRef={passwordInputRef}
           />
         </div>
         <Checkbox

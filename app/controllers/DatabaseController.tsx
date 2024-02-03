@@ -183,7 +183,7 @@ export async function registrarUsuario(
       payload
     );
 
-    if (response) return response.fieldCount;
+    if (response) return response.insertId;
   } catch (error) {
     throw error;
   }

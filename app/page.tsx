@@ -8,8 +8,9 @@ export default function Home() {
   const [user, setUser] = useState("");
   const router = useRouter();
   useEffect(() => {
-    let userEmail: string | null = localStorage.getItem("userEmail");
-    if (!userEmail) router.push("/auth/login");
+    let userData: string | null = localStorage.getItem("userData");
+    console.log(userData);
+    if (!userData) router.push("/auth/login");
   }, []);
 
   return (

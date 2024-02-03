@@ -4,6 +4,7 @@ import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/solid";
 import { obtenerRegistroPorCampo } from "../controllers/DatabaseController";
+import { useRouter } from "next/navigation";
 
 const navigation = [
   { name: "Dashboard", href: "/", current: false },
@@ -16,9 +17,10 @@ function classNames(...classes: any[]) {
 }
 
 export default function Navbar() {
+  const router = useRouter();
   async function handleSignout() {
-    localStorage.removeItem("userEmail");
-    localStorage.removeItem("userId");
+    localStorage.removeItem("userData");
+    router.push("/auth/login");
   }
 
   return (
@@ -129,6 +131,7 @@ export default function Navbar() {
                         {({ active }: { active: boolean }) => (
                           <a
                             href="#"
+                            onClick={handleSignout}
                             className={classNames(
                               active ? "bg-gray-100" : "",
                               "block px-4 py-2 text-sm text-gray-700"
