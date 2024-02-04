@@ -15,3 +15,8 @@
 .courseCard {
   margin: 0rem 2rem;
 }
+
+.titleContainer {
+  display: flex;
+  align-items: center;
+}
