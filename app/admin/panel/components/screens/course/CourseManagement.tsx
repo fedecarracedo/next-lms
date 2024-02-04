@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import CourseTable from "./CourseTable";
-import UnitTable from "./UnitTable";
+import UnitAccordeonList from "./UnitAccordeonList";
 
 export function CourseManagementScreen() {
   const [selected, setSelected] = useState<number | null>(null);
@@ -8,6 +8,6 @@ export function CourseManagementScreen() {
   return selected == null ? (
     <CourseTable setSelected={setSelected} />
   ) : (
-    <UnitTable setSelected={setSelected} selected={selected} />
+    <UnitAccordeonList setSelected={setSelected} selected={selected} />
   );
 }

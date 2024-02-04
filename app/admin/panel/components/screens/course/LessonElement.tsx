@@ -1,4 +1,5 @@
 import { IconButton, ListItem, ListItemSuffix } from "@material-tailwind/react";
+import { Dispatch, SetStateAction } from "react";
 
 function TrashIcon() {
   return (
@@ -20,14 +21,24 @@ function TrashIcon() {
 export default function LessonElement({
   leccion_id,
   leccion_nombre,
+  setLesson,
 }: {
   leccion_id: number;
   leccion_nombre: string;
+  setLesson: Dispatch<SetStateAction<number | null>>;
 }) {
   return (
     <ListItem placeholder={""} ripple={false} className="py-1 pr-1 pl-4">
       {leccion_nombre}
-      <ListItemSuffix placeholder={""}>
+      <ListItemSuffix className="flex" placeholder={""}>
+        <IconButton
+          onClick={() => setLesson(leccion_id)}
+          placeholder={""}
+          variant="text"
+          color="blue-gray"
+        >
+          <i className="fa-solid fa-pen fa-lg"></i>
+        </IconButton>
         <IconButton placeholder={""} variant="text" color="blue-gray">
           <TrashIcon />
         </IconButton>
