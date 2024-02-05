@@ -1,2 +1,1 @@
-GET http://localhost:8080/curso/obtenerTodos
-Content-Type: application/json
+GET https://www.material-tailwind.com/docs/react/installation

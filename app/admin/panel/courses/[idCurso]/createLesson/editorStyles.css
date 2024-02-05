@@ -1,0 +1,28 @@
+#editorjs {
+  padding: 2rem 5rem;
+  border-radius: 20px;
+  border: gray 2px solid;
+  box-shadow: 2px 2px 2px 1px gray;
+  min-width: 30vw;
+  width: 60vw;
+  background-color: white;
+}
+
+.ce-block__content:has(> .embed-tool) {
+  max-width: 70% !important;
+}
+
+.ce-block__content,
+.ce-toolbar__content {
+  max-width: unset;
+}
+
+.pageBody {
+  display: flex;
+  margin-top: 3.5rem;
+  margin-left: 16rem;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  background-color: white;
+}
