@@ -1,25 +1,16 @@
-import React, { Dispatch, SetStateAction, useState } from "react";
+import React, { useState } from "react";
 import {
   Accordion,
   AccordionHeader,
   AccordionBody,
-  ListItemSuffix,
-  IconButton,
 } from "@material-tailwind/react";
-import { List, ListItem, Card } from "@material-tailwind/react";
-import LessonElement from "./LessonElement";
-import LessonList from "./LessonList";
 
 export function UnitAccordeon({
   unidad_nombre,
-  unidad_id,
-  unidad_curso,
-  setLesson,
+  children,
 }: {
   unidad_nombre: string;
-  unidad_id: number;
-  unidad_curso: number;
-  setLesson: Dispatch<SetStateAction<number | null>>;
+  children: JSX.Element;
 }) {
   const [open, setOpen] = React.useState(0);
 
@@ -42,7 +33,7 @@ export function UnitAccordeon({
           {unidad_nombre}
         </AccordionHeader>
         <AccordionBody className="pt-0 text-base font-normal">
-          <LessonList setLesson={setLesson} idUnidad={unidad_id} />
+          {children}
         </AccordionBody>
       </Accordion>
     </div>

@@ -1,9 +1,2 @@
-POST http://localhost:8080/usuario/registrarUsuario
+GET http://localhost:8080/curso/obtenerTodos
 Content-Type: application/json
-
-{
-    "nombre":"Admin",
-"apellido":"Prueba3",
-"email":"fede@admin.com",
-"clave":"$2a$10$iUY0XN2.in2A9oyZLvOrAOVaemcvQ1Z/Txv.FbDvdmn7OGSc1JylG","tipo":"Administrador"
-}

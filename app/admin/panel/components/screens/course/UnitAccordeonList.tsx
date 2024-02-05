@@ -6,6 +6,7 @@ import Unidad from "@/app/model/Unidad";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { UnitAccordeon } from "./UnitAccordeon";
 import LessonEditor from "./LessonPreview";
+import LessonList from "./LessonList";
 
 export default function UnitAccordeonList({
   selected,
@@ -22,17 +23,13 @@ export default function UnitAccordeonList({
   }
   useEffect(() => {
     cargarUnidades();
-    console.log(lesson);
   }, [lesson]);
   return lesson == null ? (
     <div className="">
       {unidades?.map((unidad) => (
-        <UnitAccordeon
-          setLesson={setLesson}
-          unidad_nombre={unidad.unidad_nombre}
-          unidad_id={unidad.unidad_id}
-          unidad_curso={unidad.unidad_curso}
-        />
+        <UnitAccordeon unidad_nombre={unidad.unidad_nombre}>
+          <LessonList idUnidad={unidad.unidad_id} setLesson={setLesson} />
+        </UnitAccordeon>
       ))}
     </div>
   ) : (
