@@ -1,11 +1,15 @@
 export default class Curso {
-  nombre: string;
-  idCurso: number;
-  descripcion: string;
+  curso_nombre: string;
+  curso_id: number;
+  curso_descripcion: string;
 
-  constructor(nombre: string, idCurso: number, descripcion: string) {
-    this.nombre = nombre;
-    this.idCurso = idCurso;
-    this.descripcion = descripcion;
+  constructor(
+    curso_nombre: string,
+    curso_id: number,
+    curso_descripcion: string
+  ) {
+    this.curso_nombre = curso_nombre;
+    this.curso_id = curso_id;
+    this.curso_descripcion = curso_descripcion;
   }
 }

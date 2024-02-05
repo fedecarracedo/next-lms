@@ -1,5 +1,5 @@
 import { IconButton, ListItem, ListItemSuffix } from "@material-tailwind/react";
-import { Dispatch, SetStateAction } from "react";
+import { usePathname, useRouter } from "next/navigation";
 
 function TrashIcon() {
   return (
@@ -21,18 +21,20 @@ function TrashIcon() {
 export default function LessonElement({
   leccion_id,
   leccion_nombre,
-  setLesson,
 }: {
   leccion_id: number;
   leccion_nombre: string;
-  setLesson: Dispatch<SetStateAction<number | null>>;
 }) {
+  const router = useRouter();
+  const pathName = usePathname();
   return (
     <ListItem placeholder={""} ripple={false} className="py-1 pr-1 pl-4">
       {leccion_nombre}
       <ListItemSuffix className="flex" placeholder={""}>
         <IconButton
-          onClick={() => setLesson(leccion_id)}
+          onClick={() => {
+            router.push(`${pathName}/editLesson/${leccion_id}`);
+          }}
           placeholder={""}
           variant="text"
           color="blue-gray"
