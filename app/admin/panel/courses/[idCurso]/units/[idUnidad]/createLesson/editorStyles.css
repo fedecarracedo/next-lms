@@ -17,10 +17,12 @@
   max-width: unset;
 }
 
+.nameInput {
+  width: 60vw;
+}
+
 .pageBody {
   display: flex;
-  margin-top: 3.5rem;
-  margin-left: 16rem;
   align-items: center;
   flex-direction: column;
   justify-content: center;

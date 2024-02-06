@@ -3,6 +3,7 @@
 import { obtenerLeccionPorId } from "@/app/controllers/DatabaseController";
 import parseEditorElement from "@/app/controllers/EditorParser";
 import { useEffect, useState } from "react";
+import "../../../../courseStyles.css";
 
 export default function LessonEditor({
   params,
@@ -15,7 +16,7 @@ export default function LessonEditor({
     let lesson = await obtenerLeccionPorId(params.idLeccion);
     let contenidoJson = JSON.parse(lesson.contenido);
     let contenidoJsx: JSX.Element[] = [];
-    contenidoJson.forEach((elem: any) => {
+    contenidoJson.blocks.forEach((elem: any) => {
       let parsedEl = parseEditorElement(elem);
       if (parsedEl) contenidoJsx.push(parsedEl);
     });
@@ -24,6 +25,6 @@ export default function LessonEditor({
 
   useEffect(() => {
     handleLessonContent();
-  });
-  return <div>{lessonContent.map((el) => el)}</div>;
+  }, []);
+  return <div className="lessonContent">{lessonContent.map((el) => el)}</div>;
 }

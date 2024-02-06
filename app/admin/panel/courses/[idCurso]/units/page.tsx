@@ -20,7 +20,7 @@ export default function UnitAccordeonList({
     cargarUnidades();
   }, []);
   return (
-    <div>
+    <div className="unitsContainer">
       {unidades?.map((unidad) => (
         <UnitAccordeon unidad_nombre={unidad.unidad_nombre}>
           <LessonList idUnidad={unidad.unidad_id} />

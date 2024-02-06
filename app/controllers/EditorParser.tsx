@@ -4,8 +4,8 @@ export default function parseEditorElement(
   blockElement: any
 ): JSX.Element | undefined {
   let elemTag: string;
-  let elemProps: { className?: string };
-  let elemContent: string;
+  let elemProps;
+  let elemContent: any;
   switch (blockElement.type) {
     case "header":
       elemTag = "h" + blockElement.data.level;
@@ -35,6 +35,20 @@ export default function parseEditorElement(
           ? "max-w-md space-y-1 list-disc list-inside"
           : "ps-5 mt-2 space-y-1 list-decimal list-inside";
       elemProps = { className: classes };
+      break;
+    case "embed":
+      elemTag = "div";
+      elemProps = {
+        className: "rounded-lg flex justify-center w-full mt-6 mb-6 ",
+      };
+      elemContent = React.createElement("iframe", {
+        src: blockElement.data.source.replace("watch?v=", "embed/"),
+        allow:
+          "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share",
+        frameborder: 0,
+        width: 580,
+        height: 415,
+      });
       break;
     default:
       elemTag = "";

@@ -4,6 +4,7 @@ import {
   AccordionHeader,
   AccordionBody,
 } from "@material-tailwind/react";
+import "../../courseStyles.css";
 
 export function UnitAccordeon({
   unidad_nombre,
