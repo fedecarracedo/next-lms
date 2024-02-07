@@ -1,3 +1,5 @@
+import "./courseStyles.css";
+
 export default function CourseTable({
   children,
 }: {

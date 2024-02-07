@@ -23,7 +23,7 @@ export default function LessonElement({
   leccion_nombre,
 }: {
   leccion_id: number;
-  leccion_nombre: string;
+  leccion_nombre: string | JSX.Element;
 }) {
   const router = useRouter();
   const pathName = usePathname();

@@ -4,7 +4,6 @@ import Curso from "../model/Curso";
 import { TipoUsuario } from "../model/UsuarioTipo";
 import { OkPacket } from "../model/MySQLResponse";
 import { encryptPassword } from "./AuthController";
-const bcrypt = require("bcryptjs");
 
 async function makeGETRequestToApi(ruta: string): Promise<any[]> {
   try {

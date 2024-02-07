@@ -46,8 +46,9 @@ export default function parseEditorElement(
         allow:
           "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share",
         frameborder: 0,
-        width: 580,
-        height: 415,
+        width: 640,
+        height: 360,
+        allowfullscreen: "allowfullscreen",
       });
       break;
     default:

@@ -3,5 +3,13 @@
 }
 
 .lessonContent {
-  padding: 2rem 9rem;
+  padding: 2rem 18rem;
+}
+
+.CourseManagementGallery {
+  padding: 3rem 6rem;
+}
+
+.lessonPlaceholder {
+  height: 3rem;
 }

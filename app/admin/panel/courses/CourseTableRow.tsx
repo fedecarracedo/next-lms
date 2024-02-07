@@ -18,7 +18,7 @@ export default function CourseTableRow({ curso }: { curso: Curso }) {
           href="#"
           className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
           onClick={() => {
-            router.push(`./courses/${curso.curso_id}`);
+            router.push(`./courses/${curso.curso_id}/units`);
           }}
         >
           Edit
