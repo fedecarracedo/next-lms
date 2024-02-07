@@ -16,11 +16,13 @@ export default function LessonList({ idUnidad }: { idUnidad: number }) {
     if (lecciones) setLessons(lecciones);
   }
 
-  async function handleNewLesson(e?: any) {
+  async function handleNewLesson() {
+    // @ts-ignore
     if (!lessonNameRef.current.value) setNewLesson(false);
     else {
       let payload = {
         leccion_unidad: idUnidad,
+        // @ts-ignore
         leccion_nombre: lessonNameRef.current.value,
         leccion_contenido: JSON.stringify({ blocks: [] }),
       };
