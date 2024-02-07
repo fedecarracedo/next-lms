@@ -5,7 +5,7 @@ import Unidad from "@/app/model/Unidad";
 import { useEffect, useRef, useState } from "react";
 import { UnitAccordeon } from "./UnitAccordeon";
 import LessonList from "./LessonList";
-import { IconButton, Input } from "@material-tailwind/react";
+import { IconButton } from "@material-tailwind/react";
 
 export default function UnitAccordeonList({
   params,

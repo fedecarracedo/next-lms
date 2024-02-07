@@ -1,4 +1,4 @@
-import { Card, List } from "@material-tailwind/react";
+import { Card, List, ListItem } from "@material-tailwind/react";
 import LessonElement from "./LessonElement";
 import { useEffect, useRef, useState } from "react";
 import Leccion from "@/app/model/Leccion";
@@ -50,7 +50,7 @@ export default function LessonList({ idUnidad }: { idUnidad: number }) {
         {newLesson && (
           <input
             type="text"
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 hover:"
             placeholder="Nueva leccion"
             required
             autoFocus
@@ -61,7 +61,7 @@ export default function LessonList({ idUnidad }: { idUnidad: number }) {
         )}
         {!newLesson && (
           <div
-            className="flex items-center justify-center rounded bg-gray-50 dark:bg-gray-800 lessonPlaceholder"
+            className="flex items-center justify-center rounded bg-gray-50 dark:bg-gray-800 lessonPlaceholder w-full hover:bg-gray-100"
             onClick={() => setNewLesson(true)}
           >
             <p className="text-2xl text-gray-400 dark:text-gray-500">
