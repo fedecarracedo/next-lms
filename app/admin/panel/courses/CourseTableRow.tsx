@@ -1,7 +1,7 @@
 import Curso from "@/app/model/Curso";
 import { useRouter } from "next/navigation";
 
-export default function CourseTableRow({ curso }: { curso: Curso }) {
+export default function CourseTableRow({ curso }: { curso: Curso | any }) {
   const router = useRouter();
   return (
     <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
