@@ -52,7 +52,6 @@ export default function LessonCreator({
           }),
         }
       );
-      console.log(response);
     });
   }
   return (
