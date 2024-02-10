@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import AdminSidebar from "./components/AdminSidebar";
 import AdminBody from "./components/AdminBody";
+import { AdminNavbar } from "./components/AdminNavbar";
 
 export const metadata: Metadata = {
   title: "Create Next App",

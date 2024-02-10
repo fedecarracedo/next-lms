@@ -57,10 +57,10 @@ export default function LessonEditor({
           method: "POST",
           body: JSON.stringify({
             leccion_contenido: JSON.stringify(savedContent),
+            leccion_id: params.idLeccion,
           }),
         }
       );
-      console.log(response);
     });
   }
 

@@ -1,0 +1,16 @@
+.unitsContainer {
+  padding: 3rem 6rem;
+}
+
+.lessonContent {
+  padding: 2rem 18rem;
+}
+
+.UserManagementTable {
+  padding: 3rem 6rem;
+  margin: 1rem 0rem;
+}
+
+.lessonPlaceholder {
+  height: 3rem;
+}
