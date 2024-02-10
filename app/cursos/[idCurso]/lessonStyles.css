@@ -3,38 +3,38 @@
 @tailwind utilities;
 
 .lessonContainer {
-    display: flex;
-    flex: 1;
-    margin-top: 12vh;
+  display: flex;
+  flex: 1;
+  margin-top: 12vh;
 }
 
 .LessonBody {
-    flex: 1;
-    margin-left: 20rem;
-    padding: 1.5rem 7rem;
+  flex: 1;
+  margin-left: 20rem;
+  padding: 1.5rem 15rem;
 }
 
 .LessonContent {
-    height: 88vh;
-    width: 20rem;
-    position: fixed;
-    overflow-y: scroll;
+  height: 88vh;
+  width: 21vw;
+  position: fixed;
+  overflow-y: scroll;
 }
 
 .LessonNavbar {
-    position: fixed;
-    display: block;
-    top: 0;
-    z-index: 1;
+  position: fixed;
+  display: block;
+  top: 0;
+  z-index: 1;
 }
 
 .VideoContainer {
-    width: 100%;
-    padding: 5px 0;
-    margin: 20px 0;
+  width: 100%;
+  padding: 5px 0;
+  margin: 20px 0;
 }
 
 .FillerBlock {
-    width: 10vw;
-    height: 10vh;
+  width: 10vw;
+  height: 10vh;
 }

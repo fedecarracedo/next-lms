@@ -1,6 +1,6 @@
 "use client";
 
-import React, { SetStateAction, useEffect } from "react";
+import React, { SetStateAction, useEffect, useState } from "react";
 import {
   Card,
   Typography,
@@ -20,6 +20,7 @@ import "../../lessonStyles.css";
 import {
   obtenerUnidadesCurso,
   obtenerCursoPorId,
+  obtenerRegistrosPorCampo,
 } from "@/app/controllers/DatabaseController";
 import Unidad from "@/app/model/Unidad";
 import LessonAccordion from "./LessonAccordion";
@@ -27,16 +28,33 @@ import Curso from "@/app/model/Curso";
 
 export default function LeftContentSidePanel({
   idCurso,
-  lesson,
   setLesson,
+  lessonCompleted,
 }: {
   idCurso: number;
   lesson: number;
   setLesson: React.Dispatch<React.SetStateAction<number>>;
+  lessonCompleted: boolean;
 }) {
   const [open, setOpen] = React.useState(0);
   const [unidades, setUnidades] = React.useState<Unidad[]>([]);
   const [curso, setCurso] = React.useState<Curso>();
+  const [completedLessons, setCompletedLessons] = useState<
+    { usuario_id: number; leccion_id: number }[]
+  >([]);
+
+  async function obtenerLeccionesCompletadas() {
+    const userDataString: string | null = localStorage.getItem("userData");
+    if (userDataString) {
+      const userData = JSON.parse(userDataString);
+      const response = await obtenerRegistrosPorCampo(
+        "usuario_leccion",
+        "usuario_id",
+        userData.id
+      );
+      setCompletedLessons(response);
+    }
+  }
 
   async function establecerUnidades() {
     const unidades: Unidad[] = await obtenerUnidadesCurso(idCurso);
@@ -51,7 +69,8 @@ export default function LeftContentSidePanel({
   useEffect(() => {
     establecerUnidades();
     establecerCurso();
-  }, []);
+    obtenerLeccionesCompletadas();
+  }, [lessonCompleted]);
   const handleOpen = (value: SetStateAction<number>) => {
     setOpen(open === value ? 0 : value);
   };
@@ -59,11 +78,11 @@ export default function LeftContentSidePanel({
   return (
     <Card
       placeholder={""}
-      className=" w-full max-w-[20rem] p-4 shadow-xl shadow-blue-gray-900/5 LessonContent"
+      className=" w-full p-4 shadow-xl shadow-blue-gray-900/5 LessonContent"
     >
-      <div className="mb-2 p-4">
+      <div className="mb-2 px-4">
         <Typography placeholder={""} variant="h5" color="blue-gray">
-          {curso?.nombre}
+          {curso?.curso_nombre}
         </Typography>
       </div>
       <List placeholder={""}>
@@ -75,8 +94,9 @@ export default function LeftContentSidePanel({
               open={open}
               handleOpen={handleOpen}
               idUnidad={unidad.unidad_id}
-              orden={index + 1}
+              orden={unidad.unidad_orden}
               description={unidad.unidad_nombre}
+              completedLessons={completedLessons}
             />
           );
         })}

@@ -3,5 +3,14 @@
 @tailwind utilities;
 
 .CourseContainer {
+  max-width: 100vw;
   display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.CourseCard {
+  margin: 1rem;
+  width: 21vw;
+  height: 48vh;
 }

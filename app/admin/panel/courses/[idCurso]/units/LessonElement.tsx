@@ -21,12 +21,20 @@ function TrashIcon() {
 export default function LessonElement({
   leccion_id,
   leccion_nombre,
+  setLessons,
 }: {
   leccion_id: number;
   leccion_nombre: string | JSX.Element;
+  setLessons: any;
 }) {
   const router = useRouter();
   const pathName = usePathname();
+  async function handleDeleteLesson() {
+    const response = await fetch(
+      `http://localhost:8080/leccion/deleteElementById/${leccion_id}`
+    );
+    setLessons([]);
+  }
   return (
     <ListItem placeholder={""} ripple={false} className="py-1 pr-1 pl-4">
       {leccion_nombre}
@@ -41,7 +49,12 @@ export default function LessonElement({
         >
           <i className="fa-solid fa-pen fa-lg"></i>
         </IconButton>
-        <IconButton placeholder={""} variant="text" color="blue-gray">
+        <IconButton
+          onClick={handleDeleteLesson}
+          placeholder={""}
+          variant="text"
+          color="blue-gray"
+        >
           <TrashIcon />
         </IconButton>
       </ListItemSuffix>

@@ -100,13 +100,19 @@ export async function obtenerUnidadesCurso(idCurso: number): Promise<Unidad[]> {
     unidad_id: number;
     unidad_curso: number;
     unidad_nombre: string;
+    unidad_orden: number;
   };
   const response: BloqueRespuesta[] = await makeGETRequestToApi(
     `/unidad/getRecordUsing/unidad_curso/${idCurso}`
   );
 
   const unidades: Unidad[] = response.map((elem) => {
-    return new Unidad(elem.unidad_curso, elem.unidad_nombre, elem.unidad_id);
+    return new Unidad(
+      elem.unidad_curso,
+      elem.unidad_nombre,
+      elem.unidad_id,
+      elem.unidad_orden
+    );
   });
 
   return unidades;
@@ -154,16 +160,16 @@ export async function obtenerLeccionPorId(idLeccion: number): Promise<Leccion> {
   return leccion[0];
 }
 
-export async function obtenerRegistroPorCampo(
+export async function obtenerRegistrosPorCampo(
   tabla: string,
   campo: string,
-  valor: string
+  valor: string | number
 ) {
   const response: any[] = await makeGETRequestToApi(
     `/${tabla}/getRecordUsing/${campo}/${valor}`
   );
 
-  return response[0];
+  return response;
 }
 
 export async function registrarUsuario(

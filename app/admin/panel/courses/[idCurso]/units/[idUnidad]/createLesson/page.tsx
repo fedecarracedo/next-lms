@@ -11,6 +11,7 @@ import Embed from "@editorjs/embed";
 import "./editorStyles.css";
 import { Button, Input, Typography } from "@material-tailwind/react";
 import { useRef } from "react";
+import { obtenerLeccionesUnidad } from "@/app/controllers/DatabaseController";
 
 export default function LessonCreator({
   params,
@@ -40,6 +41,8 @@ export default function LessonCreator({
   });
 
   async function handleCreateLesson() {
+    const leccionesUnidad = await obtenerLeccionesUnidad(params.idUnidad);
+    console.log(leccionesUnidad);
     editor.save().then(async (outputData) => {
       const response = await fetch(
         "http://localhost:8080/leccion/crearLeccion",
@@ -49,6 +52,7 @@ export default function LessonCreator({
             leccion_contenido: JSON.stringify(outputData),
             leccion_nombre: lessonInputRef.current?.value,
             leccion_unidad: params.idUnidad,
+            leccion_orden: leccionesUnidad.length,
           }),
         }
       );

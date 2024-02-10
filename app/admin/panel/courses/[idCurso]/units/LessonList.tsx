@@ -25,6 +25,7 @@ export default function LessonList({ idUnidad }: { idUnidad: number }) {
         // @ts-ignore
         leccion_nombre: lessonNameRef.current.value,
         leccion_contenido: JSON.stringify({ blocks: [] }),
+        leccion_orden: lessons.length,
       };
       let response = await fetch("http://localhost:8080/leccion/crearLeccion", {
         method: "POST",
@@ -36,7 +37,7 @@ export default function LessonList({ idUnidad }: { idUnidad: number }) {
 
   useEffect(() => {
     loadLessons();
-  }, [newLesson]);
+  }, [lessons, newLesson]);
 
   return (
     <Card placeholder={""} className="w-full">
@@ -45,6 +46,7 @@ export default function LessonList({ idUnidad }: { idUnidad: number }) {
           <LessonElement
             leccion_nombre={lesson.nombre}
             leccion_id={lesson.idLeccion}
+            setLessons={setLessons}
           />
         ))}
         {newLesson && (

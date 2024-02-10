@@ -12,6 +12,7 @@ import { useRouter } from "next/navigation";
 export default function Lecciones({ params }: { params: { idCurso: number } }) {
   const [lesson, setLesson] = useState(0);
   const [authorized, setAuthorized] = useState<boolean>(false);
+  const [lessonCompleted, setLessonCompleted] = useState<boolean>(false);
   const router = useRouter();
 
   async function evaluarPertenenciaAlCurso(): Promise<void> {
@@ -20,9 +21,9 @@ export default function Lecciones({ params }: { params: { idCurso: number } }) {
       const usuario: UserData = JSON.parse(userDataString);
       const cursosUsuario: Curso[] = await obtenerCursosUsuario(usuario.id);
       const cursoActual: Curso | undefined = cursosUsuario.find(
-        (curso) => curso.idCurso == params.idCurso
+        (curso) => curso.curso_id == params.idCurso
       );
-      if (!cursoActual) {
+      if (!cursoActual && usuario.tipo != "Administrador") {
         router.push("/cursos");
         return;
       }
@@ -32,7 +33,8 @@ export default function Lecciones({ params }: { params: { idCurso: number } }) {
 
   useLayoutEffect(() => {
     evaluarPertenenciaAlCurso();
-  }, []);
+    setLessonCompleted(false);
+  }, [lessonCompleted]);
 
   return (
     authorized == true && (
@@ -43,8 +45,9 @@ export default function Lecciones({ params }: { params: { idCurso: number } }) {
             lesson={lesson}
             setLesson={setLesson}
             idCurso={params.idCurso}
+            lessonCompleted={lessonCompleted}
           />
-          <LessonBody lesson={lesson} />
+          <LessonBody lesson={lesson} setLessonCompleted={setLessonCompleted} />
         </div>
       </div>
     )

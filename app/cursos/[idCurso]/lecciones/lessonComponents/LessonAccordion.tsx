@@ -13,6 +13,7 @@ import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import Leccion from "@/app/model/Leccion";
 import LessonItem from "./LessonItem";
 import { obtenerLeccionesUnidad } from "@/app/controllers/DatabaseController";
+import { UserData } from "@/app/model/UserData";
 
 export default function LessonAccordion({
   open,
@@ -21,6 +22,7 @@ export default function LessonAccordion({
   orden,
   description,
   setLesson,
+  completedLessons,
 }: {
   open: number;
   handleOpen: any;
@@ -28,8 +30,18 @@ export default function LessonAccordion({
   orden: number;
   description: string;
   setLesson: React.Dispatch<React.SetStateAction<number>>;
+  completedLessons: { leccion_id: number; usuario_id: number }[];
 }) {
   const [lessons, setLessons] = useState<Leccion[]>([]);
+  const [userData, setUserData] = useState<UserData | null>(null);
+
+  async function loadUserData() {
+    const userDataString: string | null = localStorage.getItem("userData");
+    if (userDataString) {
+      const userDataObj: UserData = JSON.parse(userDataString);
+      setUserData(userDataObj);
+    }
+  }
 
   function handleLesson(lessonId: number): void {
     setLesson(lessonId);
@@ -41,8 +53,9 @@ export default function LessonAccordion({
   }
 
   useEffect(() => {
+    loadUserData();
     obtenerLecciones();
-  });
+  }, []);
 
   return (
     <Accordion
@@ -78,9 +91,18 @@ export default function LessonAccordion({
       <AccordionBody className="py-1">
         <List placeholder={""} className="p-0">
           {lessons.map((leccion, index) => {
+            let completed = completedLessons.find(
+              (elem) =>
+                elem.leccion_id == leccion.idLeccion &&
+                elem.usuario_id == userData?.id
+            );
             return (
               <div onClick={() => handleLesson(leccion.idLeccion)}>
-                <LessonItem key={index} name={leccion.nombre} />
+                <LessonItem
+                  key={index}
+                  name={leccion.nombre}
+                  completed={completed ? true : false}
+                />
               </div>
             );
           })}

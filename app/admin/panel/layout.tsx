@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import AdminSidebar from "./components/AdminSidebar";
 import AdminBody from "./components/AdminBody";
 import { AdminNavbar } from "./components/AdminNavbar";
+import AuthAdminValidator from "@/app/components/AuthAdminValidator";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -15,6 +16,7 @@ export default function AdminPanelLayout({
 }>) {
   return (
     <div className="AdminPanelContainer">
+      <AuthAdminValidator />
       <AdminSidebar />
       <AdminBody>{children}</AdminBody>
     </div>

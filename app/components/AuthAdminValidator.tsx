@@ -10,11 +10,11 @@ export default function AuthAdminValidator() {
     let autorizado: boolean = false;
     if (usuario) {
       const userData: UserData = JSON.parse(usuario);
-      console.log(usuario);
-      autorizado = userData.tipo == 2 || userData.tipo == 3;
+      autorizado =
+        userData.tipo == "Administrador" || userData.tipo == "Creador";
     }
 
-    if (!usuario || !autorizado) router.push("/");
+    if (!usuario || !autorizado) router.push("/auth/login");
   }, []);
   return <div></div>;
 }
