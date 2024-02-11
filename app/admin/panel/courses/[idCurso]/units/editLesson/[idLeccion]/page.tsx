@@ -2,7 +2,7 @@
 
 import { obtenerLeccionPorId } from "@/app/controllers/DatabaseController";
 import { useEffect, useRef, useState } from "react";
-import "../../[idUnidad]/createLesson/editorStyles.css";
+import "../../editorStyles.css";
 
 import EditorJS from "@editorjs/editorjs";
 // @ts-ignore
@@ -12,6 +12,7 @@ import List from "@editorjs/list";
 // @ts-ignore
 import Embed from "@editorjs/embed";
 import { Button } from "@material-tailwind/react";
+import { useRouter } from "next/navigation";
 
 export default function LessonEditor({
   params,
@@ -20,6 +21,7 @@ export default function LessonEditor({
 }) {
   const [editor, setEditor] = useState<any>(null);
   const isReady = useRef(false);
+  const router = useRouter();
 
   async function handleLessonContent() {
     let lesson = await obtenerLeccionPorId(params.idLeccion);
@@ -62,6 +64,7 @@ export default function LessonEditor({
         }
       );
     });
+    router.push(`../previewLesson/${params.idLeccion}`);
   }
 
   useEffect(() => {
