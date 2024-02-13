@@ -4,13 +4,80 @@
 
 .CourseContainer {
   max-width: 100vw;
+  width: 100vw;
   display: flex;
-  align-items: center;
   justify-content: center;
 }
 
 .CourseCard {
   margin: 1rem;
-  width: 21vw;
-  height: 48vh;
+  width: 17vw;
+  height: 44vh;
+}
+
+.CourseGallery > h3 {
+  margin-left: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.CourseCard > * {
+  font-family: "Gilroy Medium";
+}
+
+.CourseSidebar * {
+  font-family: "Gilroy Regular";
+  font-weight: bold !important;
+  font-size: 1.2rem;
+}
+
+.CourseSidebar {
+  margin-right: 4rem;
+  max-height: 100vh;
+}
+
+.CourseGallery {
+  padding: 1rem;
+}
+
+@font-face {
+  font-family: "Gilroy Regular";
+  src: url("/static/fonts/gilroy/Gilroy-Regular.ttf");
+}
+
+@font-face {
+  font-family: "Gilroy medium";
+  src: url("/static/fonts/gilroy/Gilroy-Medium.ttf");
+}
+
+@font-face {
+  font-family: "Gilroy Bold";
+  src: url("/static/fonts/gilroy/Gilroy-Bold.ttf");
+}
+
+@layer base {
+  h1 {
+    font-size: 64px;
+    font-weight: 700;
+  }
+  h2 {
+    font-size: 48px;
+    font-weight: 700;
+  }
+  h3 {
+    font-size: 34px;
+    font-weight: 700;
+    font-family: "Gilroy Bold";
+  }
+  h4 {
+    font-size: 28px;
+    font-weight: 700;
+  }
+  h5 {
+    font-size: 24px;
+    font-weight: 700;
+  }
+  h6 {
+    font-size: 20px;
+    font-weight: 700;
+  }
 }

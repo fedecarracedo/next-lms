@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Navbar from "../components/navbar";
 import "../globals.css";
 import CourseCard from "./courseComponents/CourseCard";
 import "./courses.css";
@@ -11,6 +10,8 @@ import {
   obtenerTodos,
 } from "../controllers/DatabaseController";
 import { UserData } from "../model/UserData";
+import TopNavbar from "../components/navbar";
+import CourseSidebar from "./courseComponents/CourseSidebar";
 
 export default function Cursos() {
   const [cursos, setCursos] = useState<Curso[]>([]);
@@ -36,17 +37,21 @@ export default function Cursos() {
 
   return (
     <div>
-      <Navbar />
+      <TopNavbar />
       <div className="CourseContainer">
-        <div className="grid grid-cols-1 gap-1 sm:grid-cols-2 md:grid-cols-3">
-          {cursos.map((elem, index) => (
-            <CourseCard
-              key={index}
-              id={elem.curso_id}
-              name={elem.curso_nombre}
-              description={elem.curso_descripcion}
-            />
-          ))}
+        <CourseSidebar />
+        <div className="CourseGallery">
+          <h3>Galeria de cursos</h3>
+          <div className="grid grid-cols-1 gap-1 sm:grid-cols-1 md:grid-cols-3">
+            {cursos.map((elem, index) => (
+              <CourseCard
+                key={index}
+                id={elem.curso_id}
+                name={elem.curso_nombre}
+                description={elem.curso_descripcion}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </div>
