@@ -31,12 +31,12 @@
 }
 
 .lessonPreview {
-  padding: 1.5rem 25rem;
-  margin-top: 8vh;
+  padding: 1rem 25rem;
+  margin-top: 3vh;
 }
 
 #toast-warning {
-  position: absolute;
+  position: fixed;
   bottom: 0;
   right: 0;
   margin: 2rem;
