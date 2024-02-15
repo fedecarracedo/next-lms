@@ -29,3 +29,15 @@
   background-color: white;
   margin: 2rem 0rem;
 }
+
+.lessonPreview {
+  padding: 1.5rem 25rem;
+  margin-top: 8vh;
+}
+
+#toast-warning {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin: 2rem;
+}

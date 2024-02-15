@@ -1,0 +1,18 @@
+ul.LessonList li {
+  font-size: 16px;
+  height: 5rem;
+  padding-top: 2.05rem;
+  margin-top: -2rem;
+  background-color: red;
+  padding-left: 3rem;
+  margin-left: 1rem;
+  background: url("/static/images/list-middle-element.svg") no-repeat top left;
+}
+
+ul.LessonList li LessonElement {
+  box-shadow: none;
+}
+
+ul.LessonList {
+  font-size: 0;
+}

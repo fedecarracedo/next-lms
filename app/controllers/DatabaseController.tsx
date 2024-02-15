@@ -5,7 +5,7 @@ import { TipoUsuario } from "../model/UsuarioTipo";
 import { OkPacket } from "../model/MySQLResponse";
 import { encryptPassword } from "./AuthController";
 
-async function makeGETRequestToApi(ruta: string): Promise<any[]> {
+export async function makeGETRequestToApi(ruta: string): Promise<any[]> {
   try {
     const response = await fetch("http://localhost:8080" + ruta).then(
       (result) => {

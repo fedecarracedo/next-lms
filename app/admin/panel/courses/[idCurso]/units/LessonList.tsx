@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Leccion from "@/app/model/Leccion";
 import { obtenerLeccionesUnidad } from "@/app/controllers/DatabaseController";
 import "@/app/admin/panel/courses/courseStyles.css";
+import "./listStyles.css";
 
 export default function LessonList({ idUnidad }: { idUnidad: number }) {
   const [lessons, setLessons] = useState<Leccion[]>([]);
@@ -41,13 +42,16 @@ export default function LessonList({ idUnidad }: { idUnidad: number }) {
 
   return (
     <Card placeholder={""} className="w-full">
-      <List placeholder={""}>
-        {lessons?.map((lesson) => (
-          <LessonElement
-            leccion_nombre={lesson.nombre}
-            leccion_id={lesson.idLeccion}
-            setLessons={setLessons}
-          />
+      <ul className="LessonList">
+        {lessons?.map((lesson, index) => (
+          <li>
+            <LessonElement
+              leccion_id={lesson.idLeccion}
+              leccion_nombre={lesson.nombre}
+              setLessons={setLessons}
+              key={index}
+            />
+          </li>
         ))}
         {newLesson && (
           <input
@@ -85,7 +89,7 @@ export default function LessonList({ idUnidad }: { idUnidad: number }) {
             </p>
           </div>
         )}
-      </List>
+      </ul>
     </Card>
   );
 }

@@ -46,7 +46,7 @@ export default function UnitAccordeonList({
   return (
     <div className="unitsContainer">
       <div className="flex items-center">
-        <h2 className="mb-4">Unidades</h2>
+        <h2 className="mb-4 bg-white">Unidades</h2>
         <IconButton
           onClick={() => {
             handleCreateTempUnit();

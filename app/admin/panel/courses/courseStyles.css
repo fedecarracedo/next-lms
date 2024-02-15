@@ -13,3 +13,17 @@
 .lessonPlaceholder {
   height: 3rem;
 }
+
+.unitTitle {
+  z-index: 1;
+  background-color: #bc1479;
+  padding-bottom: 0.5rem;
+}
+
+.unitTitle {
+  color: white;
+}
+
+.unitTitle:hover {
+  background-color: #bc1479ea;
+}

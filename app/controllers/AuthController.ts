@@ -1,4 +1,4 @@
-import { obtenerRegistroPorCampo } from "./DatabaseController";
+import { obtenerRegistrosPorCampo } from "./DatabaseController";
 
 const bcrypt = require("bcryptjs");
 
@@ -14,19 +14,23 @@ export async function autenticarUsuario(
   password: string
 ): Promise<string | undefined> {
   try {
-    let usuario = await obtenerRegistroPorCampo(
+    let usuario = await obtenerRegistrosPorCampo(
       "usuario",
       "usuario_email",
       email
     );
-    let esClaveValida = await bcrypt.compare(password, usuario?.usuario_clave);
+    let usuarioDb = usuario[0];
+    let esClaveValida = await bcrypt.compare(
+      password,
+      usuarioDb[0].usuario_clave
+    );
     if (usuario && esClaveValida) {
       let userDataString = JSON.stringify({
-        name: usuario.usuario_nombre,
-        surname: usuario.usuario_apellido,
-        email: usuario.usuario_email,
-        id: usuario.usuario_id,
-        tipo: usuario.usuario_tipo,
+        name: usuarioDb.usuario_nombre,
+        surname: usuarioDb.usuario_apellido,
+        email: usuarioDb.usuario_email,
+        id: usuarioDb.usuario_id,
+        tipo: usuarioDb.usuario_tipo,
       });
       return userDataString;
     }

@@ -36,7 +36,7 @@ export default function LessonElement({
     setLessons([]);
   }
   return (
-    <ListItem placeholder={""} ripple={false} className="py-1 pr-1 pl-4">
+    <ListItem placeholder={""} ripple={false} className="py-1 pr-1 pl-2">
       {leccion_nombre}
       <ListItemSuffix className="flex" placeholder={""}>
         <IconButton

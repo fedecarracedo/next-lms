@@ -17,13 +17,11 @@ export function UnitAccordeon({
       >
         <ListItem
           placeholder={""}
-          className={`border-b-0 transition-colors w-90`}
+          className={`border-b-0 transition-colors w-90 unitTitle`}
         >
           <h5>{unidad_nombre}</h5>
         </ListItem>
-        <ListItem placeholder={""} className="pt-0 text-base font-normal">
-          {children}
-        </ListItem>
+        {children}
       </List>
     </div>
   );
