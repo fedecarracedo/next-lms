@@ -12,6 +12,28 @@ import {
 import { UserData } from "../model/UserData";
 import TopNavbar from "../components/navbar";
 import CourseSidebar from "./courseComponents/CourseSidebar";
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
+
+const responsive = {
+  superLargeDesktop: {
+    // the naming can be any, depends on you.
+    breakpoint: { max: 4000, min: 3000 },
+    items: 2,
+  },
+  desktop: {
+    breakpoint: { max: 3000, min: 1024 },
+    items: 4,
+  },
+  tablet: {
+    breakpoint: { max: 1024, min: 464 },
+    items: 4,
+  },
+  mobile: {
+    breakpoint: { max: 464, min: 0 },
+    items: 1,
+  },
+};
 
 export default function Cursos() {
   const [cursos, setCursos] = useState<Curso[]>([]);
@@ -33,16 +55,17 @@ export default function Cursos() {
 
   useEffect(() => {
     obtenerCursos();
-  }, [cursos]);
+  }, []);
 
   return (
     <div>
       <TopNavbar />
       <div className="CourseContainer">
-        <CourseSidebar />
-        <div className="CourseGallery">
-          <h3>Galeria de cursos</h3>
-          <div className="grid grid-cols-1 gap-1 sm:grid-cols-1 md:grid-cols-3">
+        <div className="CarouselContainer">
+          <h3 style={{ alignSelf: "flex-start", marginLeft: "1rem" }}>
+            Tus cursos
+          </h3>
+          <Carousel responsive={responsive} className="Carousel">
             {cursos.map((elem, index) => (
               <CourseCard
                 key={index}
@@ -51,9 +74,26 @@ export default function Cursos() {
                 description={elem.curso_descripcion}
               />
             ))}
-          </div>
+          </Carousel>
+        </div>
+        <div className="CarouselContainer">
+          <h3 style={{ alignSelf: "flex-start", marginLeft: "1rem" }}>
+            Recomendado para ti
+          </h3>
+          <Carousel responsive={responsive} className="Carousel">
+            {cursos.map((elem, index) => (
+              <CourseCard
+                key={index}
+                id={elem.curso_id}
+                name={elem.curso_nombre}
+                description={elem.curso_descripcion}
+              />
+            ))}
+          </Carousel>
         </div>
       </div>
     </div>
   );
 }
+
+// Capaz agregar una Galería debajo del Carousel?

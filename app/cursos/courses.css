@@ -6,13 +6,16 @@
   max-width: 100vw;
   width: 100vw;
   display: flex;
+  align-items: center;
   justify-content: center;
+  flex-direction: column;
+  text-align: left;
 }
 
 .CourseCard {
   margin: 1rem;
-  width: 17vw;
-  height: 44vh;
+  width: 19rem;
+  height: 22rem;
 }
 
 .CourseGallery > h3 {
@@ -80,4 +83,13 @@
     font-size: 20px;
     font-weight: 700;
   }
+}
+
+.react-multi-carousel-item {
+  margin: 0;
+  padding: 0;
+}
+
+.Carousel {
+  width: 90vw;
 }

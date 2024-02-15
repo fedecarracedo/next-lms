@@ -22,7 +22,7 @@ export async function autenticarUsuario(
     let usuarioDb = usuario[0];
     let esClaveValida = await bcrypt.compare(
       password,
-      usuarioDb[0].usuario_clave
+      usuarioDb.usuario_clave
     );
     if (usuario && esClaveValida) {
       let userDataString = JSON.stringify({

@@ -56,7 +56,7 @@ export default function LessonList({ idUnidad }: { idUnidad: number }) {
         {newLesson && (
           <input
             type="text"
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 hover:"
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 mt-2"
             placeholder="Nueva leccion"
             required
             autoFocus
@@ -66,9 +66,11 @@ export default function LessonList({ idUnidad }: { idUnidad: number }) {
           />
         )}
         {!newLesson && (
+
           <div
-            className="flex items-center justify-center rounded bg-gray-50 dark:bg-gray-800 lessonPlaceholder w-full hover:bg-gray-100"
+            className="flex items-center justify-center rounded bg-gray-50 dark:bg-gray-800 lessonPlaceholder w-full hover:bg-gray-100 mt-2"
             onClick={() => setNewLesson(true)}
+            style={{cursor: "pointer"}}
           >
             <p className="text-2xl text-gray-400 dark:text-gray-500">
               <svg

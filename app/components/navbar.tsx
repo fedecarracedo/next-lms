@@ -59,11 +59,13 @@ function ProfileMenu() {
     <Menu open={isMenuOpen} handler={setIsMenuOpen} placement="bottom-end">
       <MenuHandler>
         <Button
+          placeholder={""}
           variant="text"
           color="blue-gray"
           className="flex items-center gap-1 rounded-full py-0.5 pr-2 pl-0.5 lg:ml-auto"
         >
           <Avatar
+            placeholder={""}
             variant="circular"
             size="sm"
             alt="tania andrew"
@@ -78,11 +80,12 @@ function ProfileMenu() {
           />
         </Button>
       </MenuHandler>
-      <MenuList className="p-1">
+      <MenuList placeholder={""} className="p-1">
         {profileMenuItems.map(({ label, icon }, key) => {
           const isLastItem = key === profileMenuItems.length - 1;
           return (
             <MenuItem
+              placeholder={""}
               key={label}
               onClick={closeMenu}
               className={`flex items-center gap-2 rounded ${
@@ -96,6 +99,7 @@ function ProfileMenu() {
                 strokeWidth: 2,
               })}
               <Typography
+                placeholder={""}
                 as="span"
                 variant="small"
                 className="font-normal"
@@ -135,11 +139,21 @@ function NavListMenu() {
 
   const renderItems = navListMenuItems.map(({ title, description }) => (
     <a href="#" key={title}>
-      <MenuItem>
-        <Typography variant="h6" color="blue-gray" className="mb-1">
+      <MenuItem placeholder={""}>
+        <Typography
+          placeholder={""}
+          variant="h6"
+          color="blue-gray"
+          className="mb-1"
+        >
           {title}
         </Typography>
-        <Typography variant="small" color="gray" className="font-normal">
+        <Typography
+          placeholder={""}
+          variant="small"
+          color="gray"
+          className="font-normal"
+        >
           {description}
         </Typography>
       </MenuItem>
@@ -150,8 +164,18 @@ function NavListMenu() {
     <React.Fragment>
       <Menu allowHover open={isMenuOpen} handler={setIsMenuOpen}>
         <MenuHandler>
-          <Typography as="a" href="#" variant="small" className="font-normal">
-            <MenuItem className="hidden items-center gap-2 font-bold text-blue-gray-900 lg:flex lg:rounded-full">
+          <Typography
+            placeholder={""}
+            as="a"
+            href="#"
+            variant="small"
+            className="font-normal"
+          >
+            <MenuItem
+              placeholder={""}
+              className="hidden items-center gap-2 font-bold text-blue-gray-900 lg:flex lg:rounded-full"
+              style={{ fontFamily: "Gilroy Bold" }}
+            >
               <Square3Stack3DIcon className="h-[18px] w-[18px] text-blue-gray-500" />{" "}
               Pages{" "}
               <ChevronDownIcon
@@ -163,8 +187,12 @@ function NavListMenu() {
             </MenuItem>
           </Typography>
         </MenuHandler>
-        <MenuList className="hidden w-[36rem] grid-cols-7 gap-3 overflow-visible lg:grid">
+        <MenuList
+          placeholder={""}
+          className="hidden w-[36rem] grid-cols-7 gap-3 overflow-visible lg:grid"
+        >
           <Card
+            placeholder={""}
             color="blue"
             shadow={false}
             variant="gradient"
@@ -177,7 +205,10 @@ function NavListMenu() {
           </ul>
         </MenuList>
       </Menu>
-      <MenuItem className="flex items-center gap-2 font-medium text-blue-gray-900 lg:hidden">
+      <MenuItem
+        placeholder={""}
+        className="flex items-center gap-2 font-medium text-blue-gray-900 lg:hidden"
+      >
         <Square3Stack3DIcon className="h-[18px] w-[18px] text-blue-gray-500" />{" "}
         Pages{" "}
       </MenuItem>
@@ -210,6 +241,7 @@ function NavList() {
       <NavListMenu />
       {navListItems.map(({ label, icon }, key) => (
         <Typography
+          placeholder={""}
           key={label}
           as="a"
           href="#"
@@ -217,7 +249,10 @@ function NavList() {
           color="gray"
           className="font-bold text-blue-gray-500"
         >
-          <MenuItem className="flex items-center gap-2 lg:rounded-full">
+          <MenuItem
+            placeholder={""}
+            className="flex items-center gap-2 lg:rounded-full"
+          >
             {React.createElement(icon, { className: "h-[18px] w-[18px]" })}{" "}
             <span className="text-gray-900"> {label}</span>
           </MenuItem>
@@ -241,6 +276,7 @@ export default function TopNavbar() {
 
   return (
     <Navbar
+      placeholder={""}
       className="mx-auto my-2 mb-6 p-2 lg:rounded-full lg:pl-6"
       style={{
         width: "70vw",
@@ -263,6 +299,7 @@ export default function TopNavbar() {
           <NavList />
         </div>
         <IconButton
+          placeholder={""}
           size="sm"
           color="blue-gray"
           variant="text"
