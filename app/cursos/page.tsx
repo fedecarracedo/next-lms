@@ -22,12 +22,12 @@ const responsive = {
     items: 2,
   },
   desktop: {
-    breakpoint: { max: 3000, min: 1024 },
+    breakpoint: { max: 3000, min: 1100 },
     items: 4,
   },
   tablet: {
-    breakpoint: { max: 1024, min: 464 },
-    items: 4,
+    breakpoint: { max: 1100, min: 464 },
+    items: 3,
   },
   mobile: {
     breakpoint: { max: 464, min: 0 },

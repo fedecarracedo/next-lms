@@ -1,8 +1,24 @@
 import { UserData } from "@/app/model/UserData";
 import { useRouter } from "next/navigation";
+import { Dispatch, SetStateAction } from "react";
 
-export default function UsersTableRow({ usuario }: { usuario: any }) {
+export default function UsersTableRow({
+  usuario,
+  setUserRemoved,
+  idCurso,
+}: {
+  usuario: any;
+  setUserRemoved: Dispatch<SetStateAction<boolean>>;
+  idCurso: string;
+}) {
   const router = useRouter();
+
+  async function handleRemoveUser() {
+    const response = await fetch(
+      `http://localhost:8080/usuario_curso/desmatricularUsuario/${usuario.usuario_id}/${idCurso}`
+    );
+    setUserRemoved(true);
+  }
   return (
     <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
       <th
@@ -17,16 +33,10 @@ export default function UsersTableRow({ usuario }: { usuario: any }) {
       <td className="px-6 py-4 text-right">
         <div>
           <a
-            href="#"
-            className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+            onClick={handleRemoveUser}
+            className="font-bold ml-4 text-red-600 dark:text-blue-500 hover:underline cursor-pointer"
           >
-            Usuarios
-          </a>
-          <a
-            href="#"
-            className="font-medium ml-4 text-blue-600 dark:text-blue-500 hover:underline"
-          >
-            Contenidos
+            Quitar del curso
           </a>
         </div>
       </td>

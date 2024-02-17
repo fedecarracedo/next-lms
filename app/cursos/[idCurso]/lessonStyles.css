@@ -8,6 +8,12 @@
   margin-top: 12vh;
 }
 
+.LessonItem {
+  margin-left: 2rem;
+  font-size: 0.95rem;
+  width: 90%;
+}
+
 .LessonBody {
   flex: 1;
   margin-left: 20rem;

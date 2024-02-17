@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useLayoutEffect, useState } from "react";
 import {
   Typography,
   List,
@@ -7,6 +7,7 @@ import {
   Accordion,
   AccordionHeader,
   AccordionBody,
+  Chip,
 } from "@material-tailwind/react";
 import { PresentationChartBarIcon } from "@heroicons/react/24/solid";
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
@@ -34,6 +35,7 @@ export default function LessonAccordion({
 }) {
   const [lessons, setLessons] = useState<Leccion[]>([]);
   const [userData, setUserData] = useState<UserData | null>(null);
+  const [completedUnit, setCompletedUnit] = useState(false);
 
   async function loadUserData() {
     const userDataString: string | null = localStorage.getItem("userData");
@@ -47,15 +49,32 @@ export default function LessonAccordion({
     setLesson(lessonId);
   }
 
-  async function obtenerLecciones() {
+  async function evaluarUnidadCompletada() {
     const leccionesUnidad: Leccion[] = await obtenerLeccionesUnidad(idUnidad);
+    let unidadCompletada = true;
+    for (let j = 0; j < leccionesUnidad.length; j++) {
+      let currentLesson = leccionesUnidad[j];
+      let found = false;
+      for (let i = 0; i < completedLessons.length; i++) {
+        let currentCompletedLesson = completedLessons[i];
+        if (currentCompletedLesson.leccion_id == currentLesson.idLeccion) {
+          found = true;
+          break;
+        }
+      }
+      if (!found) {
+        unidadCompletada = false;
+        break;
+      }
+    }
     setLessons(leccionesUnidad);
+    setCompletedUnit(unidadCompletada);
   }
 
-  useEffect(() => {
+  useLayoutEffect(() => {
+    evaluarUnidadCompletada();
     loadUserData();
-    obtenerLecciones();
-  }, []);
+  }, [completedLessons]);
 
   return (
     <Accordion
@@ -77,7 +96,17 @@ export default function LessonAccordion({
           className="border-b-0 p-3"
         >
           <ListItemPrefix placeholder={""}>
-            <PresentationChartBarIcon className="h-5 w-5" />
+            {completedUnit ? (
+              <Chip
+                value={<i className="fa-solid fa-check" />}
+                size="sm"
+                variant="ghost"
+                color="green"
+                className="rounded-full"
+              />
+            ) : (
+              <PresentationChartBarIcon className="h-5 w-5" />
+            )}
           </ListItemPrefix>
           <Typography
             placeholder={""}

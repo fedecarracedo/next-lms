@@ -12,11 +12,11 @@ export default function CourseUsers({
   params: { idCurso: string };
 }) {
   const [courseUsers, setCourseUsers] = useState<UserData[]>([]);
+  const [userRemoved, setUserRemoved] = useState(false);
   async function loadCourseUsers() {
     const response = await makeGETRequestToApi(
       `/curso/obtenerUsuarios/${params.idCurso}`
     );
-    console.log(response);
     if (response) {
       setCourseUsers(response);
     }
@@ -24,12 +24,19 @@ export default function CourseUsers({
 
   useEffect(() => {
     loadCourseUsers();
-  }, []);
+  }, [userRemoved]);
   return (
     <div>
       <UsersTable>
         {courseUsers.map((user, index) => {
-          return <UsersTableRow key={index} usuario={user} />;
+          return (
+            <UsersTableRow
+              idCurso={params.idCurso}
+              setUserRemoved={setUserRemoved}
+              key={index}
+              usuario={user}
+            />
+          );
         })}
       </UsersTable>
     </div>

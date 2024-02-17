@@ -25,6 +25,7 @@ import {
   RocketLaunchIcon,
   Bars2Icon,
 } from "@heroicons/react/24/solid";
+import { useRouter } from "next/navigation";
 
 // profile menu component
 const profileMenuItems = [
@@ -52,6 +53,12 @@ const profileMenuItems = [
 
 function ProfileMenu() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+  const router = useRouter();
+
+  function handleSignout() {
+    localStorage.removeItem("userData");
+    router.push("/auth/login");
+  }
 
   const closeMenu = () => setIsMenuOpen(false);
 
@@ -87,7 +94,7 @@ function ProfileMenu() {
             <MenuItem
               placeholder={""}
               key={label}
-              onClick={closeMenu}
+              onClick={isLastItem ? handleSignout : closeMenu}
               className={`flex items-center gap-2 rounded ${
                 isLastItem
                   ? "hover:bg-red-500/10 focus:bg-red-500/10 active:bg-red-500/10"

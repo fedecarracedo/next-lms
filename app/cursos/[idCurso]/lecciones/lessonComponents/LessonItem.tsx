@@ -1,5 +1,7 @@
 import { Chip, ListItem, ListItemPrefix } from "@material-tailwind/react";
 
+import "../../lessonStyles.css";
+
 export default function LessonItem({
   name,
   completed,
@@ -8,7 +10,7 @@ export default function LessonItem({
   completed: boolean;
 }) {
   return (
-    <ListItem placeholder={""}>
+    <ListItem className="LessonItem" placeholder={""}>
       {completed ? (
         <ListItemPrefix placeholder={""}>
           <Chip

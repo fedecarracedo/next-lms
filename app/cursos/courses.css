@@ -14,8 +14,8 @@
 
 .CourseCard {
   margin: 1rem;
-  width: 19rem;
-  height: 22rem;
+  width: 19vw;
+  height: 44vh;
 }
 
 .CourseGallery > h3 {
@@ -85,11 +85,6 @@
   }
 }
 
-.react-multi-carousel-item {
-  margin: 0;
-  padding: 0;
-}
-
 .Carousel {
-  width: 90vw;
+  width: 85vw;
 }
