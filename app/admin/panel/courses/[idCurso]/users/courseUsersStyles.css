@@ -1,3 +1,7 @@
-.UsersTable {
+.PageContainer {
   padding: 3rem 6rem;
+}
+
+.InviteLinkButton {
+  margin-top: 2rem;
 }
