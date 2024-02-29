@@ -1,0 +1,43 @@
+.PageBody {
+  width: 100%;
+  padding: 0 18vw;
+  margin-top: 2rem;
+  display: flex;
+}
+
+.ClassroomName {
+  width: 100%;
+  padding: 0 18vw;
+  font-weight: 900 !important;
+}
+
+.active {
+  background-color: #bc1479;
+}
+
+.EmptyBlock {
+  height: 5vh;
+  flex: 1;
+}
+
+.PageContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ContentArea {
+  background-color: rgb(240, 240, 240);
+  margin-bottom: 10vh;
+  flex: 1;
+  border-radius: 0.5rem;
+  padding: 1vw 3vw;
+}
+
+h2 {
+  margin-bottom: 0.6vw;
+}
+
+h3 {
+  margin: 0.6vw 0;
+}
