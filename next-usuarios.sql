@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 19-02-2024 a las 01:55:19
+-- Tiempo de generación: 01-03-2024 a las 05:18:58
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -31,7 +31,11 @@ CREATE TABLE `aula` (
   `aula_id` int(11) NOT NULL,
   `aula_nombre` varchar(99) NOT NULL,
   `aula_descripcion` text NOT NULL,
-  `aula_organizacion` varchar(99) NOT NULL
+  `aula_organizacion` varchar(99) NOT NULL,
+  `aula_inicio` longtext NOT NULL,
+  `aula_docentes` longtext NOT NULL,
+  `aula_faq` longtext NOT NULL,
+  `aula_curso` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -58,17 +62,6 @@ INSERT INTO `curso` (`curso_id`, `curso_nombre`, `curso_descripcion`, `curso_abi
 (4, 'Historias para armar', '', 0),
 (5, 'Yoga para novatos', '', 0),
 (6, 'Nuevo curso', '', 0);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `curso_aula`
---
-
-CREATE TABLE `curso_aula` (
-  `aula_id` int(11) NOT NULL,
-  `curso_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -172,15 +165,7 @@ CREATE TABLE `usuario_leccion` (
 --
 
 INSERT INTO `usuario_leccion` (`usuario_id`, `leccion_id`) VALUES
-(18, 24),
-(18, 31),
-(19, 24),
-(19, 25),
-(19, 26),
-(19, 27),
-(19, 29),
-(19, 30),
-(19, 31);
+(19, 24);
 
 --
 -- Índices para tablas volcadas
@@ -190,19 +175,14 @@ INSERT INTO `usuario_leccion` (`usuario_id`, `leccion_id`) VALUES
 -- Indices de la tabla `aula`
 --
 ALTER TABLE `aula`
-  ADD PRIMARY KEY (`aula_id`);
+  ADD PRIMARY KEY (`aula_id`),
+  ADD UNIQUE KEY `fk_curso` (`aula_curso`);
 
 --
 -- Indices de la tabla `curso`
 --
 ALTER TABLE `curso`
   ADD PRIMARY KEY (`curso_id`);
-
---
--- Indices de la tabla `curso_aula`
---
-ALTER TABLE `curso_aula`
-  ADD PRIMARY KEY (`aula_id`,`curso_id`);
 
 --
 -- Indices de la tabla `leccion`
@@ -228,7 +208,8 @@ ALTER TABLE `usuario`
 -- Indices de la tabla `usuario_aula`
 --
 ALTER TABLE `usuario_aula`
-  ADD PRIMARY KEY (`usuario_id`,`aula_id`);
+  ADD PRIMARY KEY (`usuario_id`,`aula_id`),
+  ADD KEY `aula_id` (`aula_id`);
 
 --
 -- Indices de la tabla `usuario_leccion`
@@ -276,6 +257,13 @@ ALTER TABLE `usuario`
 --
 
 --
+-- Filtros para la tabla `aula`
+--
+ALTER TABLE `aula`
+  ADD CONSTRAINT `aula_ibfk_1` FOREIGN KEY (`aula_id`) REFERENCES `curso_aula` (`aula_id`),
+  ADD CONSTRAINT `aula_ibfk_2` FOREIGN KEY (`aula_curso`) REFERENCES `curso` (`curso_id`);
+
+--
 -- Filtros para la tabla `leccion`
 --
 ALTER TABLE `leccion`
@@ -286,6 +274,20 @@ ALTER TABLE `leccion`
 --
 ALTER TABLE `unidad`
   ADD CONSTRAINT `fk_unidad_curso` FOREIGN KEY (`unidad_curso`) REFERENCES `curso` (`curso_id`);
+
+--
+-- Filtros para la tabla `usuario_aula`
+--
+ALTER TABLE `usuario_aula`
+  ADD CONSTRAINT `usuario_aula_ibfk_1` FOREIGN KEY (`aula_id`) REFERENCES `aula` (`aula_id`),
+  ADD CONSTRAINT `usuario_aula_ibfk_2` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`usuario_id`);
+
+--
+-- Filtros para la tabla `usuario_leccion`
+--
+ALTER TABLE `usuario_leccion`
+  ADD CONSTRAINT `usuario_leccion_ibfk_1` FOREIGN KEY (`leccion_id`) REFERENCES `leccion` (`leccion_id`),
+  ADD CONSTRAINT `usuario_leccion_ibfk_2` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`usuario_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
