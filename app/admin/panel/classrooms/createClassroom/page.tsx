@@ -1,10 +1,15 @@
-import ClassroomManager from "./ClassroomManager";
+"use client";
+
+import ClassroomInfoTab from "./ClassroomInfoTab";
+import ClassroomLandingEditor from "./ClassroomLandingEditor";
 import "./classroomCreatorStyles.css";
 
 export default function CreateClassroom() {
   return (
     <div className="PageContainer">
-      <ClassroomManager />
+      <h2>Creador de aula</h2>
+      <ClassroomInfoTab />
+      <ClassroomLandingEditor />
     </div>
   );
 }

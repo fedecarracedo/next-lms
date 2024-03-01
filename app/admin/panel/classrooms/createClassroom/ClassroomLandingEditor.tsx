@@ -66,11 +66,16 @@ export default function ClassroomLandingEditor() {
   }, []);
   return (
     <div className="pageBody">
-      <h2 className="mb-3">Editor de inicio</h2>
-      <Card placeholder={""}>
+      <h3 className="mb-3">Pagina de inicio</h3>
+      <Card className="EditorContainer" placeholder={""}>
         <div id="editorjs"></div>
       </Card>
-      <Button onClick={handleLessonSave} className="mt-4" placeholder={""}>
+      <Button
+        onClick={handleLessonSave}
+        className="mt-4 w-4/5"
+        size="lg"
+        placeholder={""}
+      >
         Guardar
       </Button>
     </div>

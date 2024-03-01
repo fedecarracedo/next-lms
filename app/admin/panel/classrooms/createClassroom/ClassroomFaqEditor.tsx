@@ -1,9 +1,7 @@
 import { IconButton } from "@material-tailwind/react";
-import "./classroomManagementStyles.css";
-import { useRouter } from "next/navigation";
+import "../classroomManagementStyles.css";
 
-export default function ClassroomTable({ children }: { children: any }) {
-  const router = useRouter();
+export default function ClassroomFaqEditor() {
   return (
     <div className="ClassroomManagementTable">
       <div className="flex">
@@ -11,15 +9,13 @@ export default function ClassroomTable({ children }: { children: any }) {
           Aulas
         </h1>
         <IconButton
-          onClick={() => {
-            router.push("/admin/panel/classrooms/createClassroom");
-          }}
+          onClick={() => {}}
           placeholder={""}
           variant="text"
           color="blue-gray"
           className="ml-2"
         >
-          <i className="fa-solid fa-plus fa-xl"></i>
+          <img src="/static/images/next.svg" alt="Plus" />
         </IconButton>
       </div>
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -37,7 +33,7 @@ export default function ClassroomTable({ children }: { children: any }) {
               </th>
             </tr>
           </thead>
-          <tbody>{children}</tbody>
+          <tbody></tbody>
         </table>
       </div>
     </div>
