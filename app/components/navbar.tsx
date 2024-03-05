@@ -284,7 +284,7 @@ export default function TopNavbar() {
   return (
     <Navbar
       placeholder={""}
-      className="mx-auto my-2 mb-6 p-2 lg:rounded-full lg:pl-6"
+      className="top-0 absolute mx-auto my-2 mb-8 p-2 lg:rounded-full lg:pl-6"
       style={{
         width: "70vw",
         maxWidth: "100vw",

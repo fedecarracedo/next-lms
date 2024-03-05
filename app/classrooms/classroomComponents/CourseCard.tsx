@@ -129,7 +129,7 @@ export default function CourseCard({
           </Tooltip>
         </div>
       </CardBody>
-      <CardFooter placeholder={""} className="pt-3">
+      <CardFooter placeholder={""} className="pt-3 bottom-0 absolute w-full">
         <Button
           onClick={() => router.push(`/classrooms/${id}`)}
           placeholder={""}

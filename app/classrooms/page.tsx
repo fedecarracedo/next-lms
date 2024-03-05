@@ -43,7 +43,10 @@ export default function Cursos() {
         <CourseSidebar />
         <div className="CourseContainer">
           <h3>Tus aulas</h3>
-          <div className="CourseGallery grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
+          <div
+            className="CourseGallery grid grid-cols-3 gap-4 sm:grid-cols-3
+          2 md:grid-cols-2"
+          >
             {classrooms.map((elem, index) => (
               <CourseCard
                 key={index}

@@ -7,6 +7,7 @@ import { Footer } from "@/app/components/Footer";
 import Aula from "@/app/model/Aula";
 import { obtenerRegistrosPorCampo } from "@/app/controllers/DatabaseController";
 import parseEditorElement from "@/app/controllers/EditorParser";
+import UnitAccordeonList from "./ClassroomContents";
 
 export default function ClassroomLanding({
   params,
@@ -44,7 +45,11 @@ export default function ClassroomLanding({
       <div className="PageBody">
         <TabBar selected={selected} setSelected={setSelected} />
         <div className="ContentArea">
-          {homeContents}
+          {selected == 0 ? (
+            homeContents
+          ) : (
+            <UnitAccordeonList idCurso={classroomData.aula_curso} />
+          )}
           <div className="EmptyBlock"></div>
         </div>
       </div>
