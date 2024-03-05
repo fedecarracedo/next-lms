@@ -4,6 +4,7 @@ import Curso from "../model/Curso";
 import { TipoUsuario } from "../model/UsuarioTipo";
 import { OkPacket } from "../model/MySQLResponse";
 import { encryptPassword } from "./AuthController";
+import Aula from "../model/Aula";
 
 export async function makeGETRequestToApi(ruta: string): Promise<any[]> {
   try {
@@ -220,4 +221,22 @@ export async function registrarUsuario(
 export async function obtenerTodos(tabla: string) {
   const response = await makeGETRequestToApi(`/${tabla}/obtenerTodos`);
   return response;
+}
+
+export async function getUserClassrooms(idUsuario: number): Promise<Aula[]> {
+  try {
+    const response = await makeGETRequestToApi(
+      `/usuario_aula/obtenerAulasUsuario/${idUsuario}`
+    );
+
+    if (response.length > 0) {
+      const aulas: Aula[] = response.map((elem) => {
+        return new Aula(elem.aula_nombre, elem.aula_id, elem.curso_descripcion);
+      });
+      return aulas;
+    }
+    return [];
+  } catch (error) {
+    throw error;
+  }
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import "./classroomCreatorStyles.css";
 
 import EditorJS from "@editorjs/editorjs";
@@ -10,15 +10,18 @@ import Header from "@editorjs/header";
 import List from "@editorjs/list";
 // @ts-ignore
 import Embed from "@editorjs/embed";
-import { Button, Card } from "@material-tailwind/react";
+import { Card } from "@material-tailwind/react";
 import { useRouter } from "next/navigation";
 
-export default function ClassroomLandingEditor() {
-  const [editor, setEditor] = useState<any>(null);
+export default function ClassroomLandingEditor({
+  setHomeEditor,
+}: {
+  setHomeEditor: any;
+}) {
   const isReady = useRef(false);
   const router = useRouter();
 
-  async function handleLessonContent() {
+  async function loadEditor() {
     let config = {
       autofocus: true,
       tools: {
@@ -40,27 +43,12 @@ export default function ClassroomLandingEditor() {
         },
       },
     };
-    setEditor(new EditorJS(config));
-  }
-
-  async function handleLessonSave() {
-    // editor.save().then(async (savedContent: any) => {
-    //   let response = await fetch(
-    //     "http://localhost:8080/leccion/modificarLeccion",
-    //     {
-    //       method: "POST",
-    //       body: JSON.stringify({
-    //         leccion_contenido: JSON.stringify(savedContent),
-    //         leccion_id: params.idLeccion,
-    //       }),
-    //     }
-    //   );
-    // });
+    setHomeEditor(new EditorJS(config));
   }
 
   useEffect(() => {
     if (!isReady.current) {
-      handleLessonContent();
+      loadEditor();
       isReady.current = true;
     }
   }, []);
@@ -70,14 +58,6 @@ export default function ClassroomLandingEditor() {
       <Card className="EditorContainer" placeholder={""}>
         <div id="editorjs"></div>
       </Card>
-      <Button
-        onClick={handleLessonSave}
-        className="mt-4 w-4/5"
-        size="lg"
-        placeholder={""}
-      >
-        Guardar
-      </Button>
     </div>
   );
 }

@@ -14,7 +14,7 @@ export default function ClassroomTableRow({ aula }: { aula: any }) {
       <td className="px-6 py-4">{aula.aula_nombre}</td>
       <td className="px-6 py-4 text-right">
         <a
-          href="#"
+          href={"/admin/panel/classrooms/edit/" + aula.aula_id}
           className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
         >
           Edit

@@ -4,57 +4,36 @@ import { useEffect, useState } from "react";
 import "../globals.css";
 import CourseCard from "./classroomComponents/CourseCard";
 import "./courses.css";
-import Curso from "../model/Curso";
 import {
-  obtenerCursosUsuario,
+  getUserClassrooms,
   obtenerTodos,
 } from "../controllers/DatabaseController";
 import { UserData } from "../model/UserData";
 import TopNavbar from "../components/navbar";
 import CourseSidebar from "./classroomComponents/CourseSidebar";
-import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-
-const responsive = {
-  superLargeDesktop: {
-    // the naming can be any, depends on you.
-    breakpoint: { max: 4000, min: 3000 },
-    items: 2,
-  },
-  desktop: {
-    breakpoint: { max: 3000, min: 1100 },
-    items: 4,
-  },
-  tablet: {
-    breakpoint: { max: 1100, min: 464 },
-    items: 3,
-  },
-  mobile: {
-    breakpoint: { max: 464, min: 0 },
-    items: 1,
-  },
-};
+import Aula from "../model/Aula";
 
 export default function Cursos() {
-  const [cursos, setCursos] = useState<Curso[]>([]);
+  const [classrooms, setClassrooms] = useState<Aula[]>([]);
 
-  async function obtenerCursos() {
+  async function getClassrooms() {
     const userDataString: string | null = localStorage.getItem("userData");
     if (userDataString) {
       const userData: UserData = JSON.parse(userDataString);
-      let cursosUsuario: Curso[] = [];
+      let aulasUsuario: Aula[] = [];
       if (userData.tipo == "Estudiante") {
         const idUsuario: any = userData.id;
-        cursosUsuario = await obtenerCursosUsuario(parseInt(idUsuario));
+        aulasUsuario = await getUserClassrooms(parseInt(idUsuario));
       } else {
-        cursosUsuario = await obtenerTodos("curso");
+        aulasUsuario = await obtenerTodos("aula");
       }
-      setCursos(cursosUsuario);
+      setClassrooms(aulasUsuario);
     }
   }
 
   useEffect(() => {
-    obtenerCursos();
+    getClassrooms();
   }, []);
 
   return (
@@ -65,11 +44,12 @@ export default function Cursos() {
         <div className="CourseContainer">
           <h3>Tus aulas</h3>
           <div className="CourseGallery grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
-            {cursos.map((elem, index) => (
+            {classrooms.map((elem, index) => (
               <CourseCard
                 key={index}
-                name={elem.curso_nombre}
-                description={elem.curso_descripcion}
+                name={elem.aula_nombre}
+                description={elem.aula_descripcion}
+                id={elem.aula_id}
               />
             ))}
           </div>

@@ -8,14 +8,18 @@ import {
   Tooltip,
   IconButton,
 } from "@material-tailwind/react";
+import { useRouter } from "next/navigation";
 
 export default function CourseCard({
   name,
   description,
+  id,
 }: {
   name: string;
   description: string;
+  id: number;
 }) {
+  const router = useRouter();
   return (
     <Card
       placeholder={""}
@@ -126,7 +130,12 @@ export default function CourseCard({
         </div>
       </CardBody>
       <CardFooter placeholder={""} className="pt-3">
-        <Button placeholder={""} size="lg" fullWidth={true}>
+        <Button
+          onClick={() => router.push(`/classrooms/${id}`)}
+          placeholder={""}
+          size="lg"
+          fullWidth={true}
+        >
           Ingresar
         </Button>
       </CardFooter>
