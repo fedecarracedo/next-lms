@@ -9,7 +9,9 @@ Algunos conceptos interesantes que se están trabajando en este proyecto son:
 * Diseño de **interfaz de usuario** (UI) y **experiencia de uso** (UX) para generar un producto atractivo.
 * Diseño e implementación de **bases de datos** que permitan modelar la información de forma eficiente y rápida para mejorar la respuesta del servicio.
 
+
 Ahora sí, a continuación, las aclaraciones para ejecutar el proyecto:
+
 
 ## Instrucciones para iniciar el proyecto
 
