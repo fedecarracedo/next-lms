@@ -1,6 +1,6 @@
 ## Introducción - Proyecto en curso
 
-Este es un proyecto con fines didácticos. Tiene el objetivo de crear un Learning Management System (LMS) utilizando un set de tecnologías que incluye, entre otras: Next.js, Tailwind CSS y MySQL.
+**Este es un proyecto con fines didácticos**. Tiene el objetivo de crear un Learning Management System (LMS) utilizando un set de tecnologías que incluye, entre otras: Next.js, Tailwind CSS y MySQL.
 
 La idea es que la plataforma cuente con una consola de administrador, desde la cual puedan crearse cursos, administrar los usuarios, modificar los contenidos de las clases y gestionar las aulas en las que se matriculan los alumnos que acceden al aprendizaje.
 
