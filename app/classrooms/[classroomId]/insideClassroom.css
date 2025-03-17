@@ -1,5 +1,5 @@
 .PageBody {
-  width: 100%;
+  width: 95vw;
   padding: 0 18vw;
   margin-top: 2rem;
   display: flex;
@@ -7,8 +7,9 @@
 
 .ClassroomName {
   width: 100%;
-  padding: 0 18vw;
+  padding: 0 14vw;
   font-weight: 900 !important;
+  margin-top: 2rem;
 }
 
 .active {
