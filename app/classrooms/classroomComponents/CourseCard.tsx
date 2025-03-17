@@ -33,19 +33,21 @@ export default function CourseCard({
         <div className="to-bg-black-10 absolute inset-0 h-full w-full bg-gradient-to-tr from-transparent via-transparent to-black/60 " />
       </CardHeader>
       <CardBody placeholder={""}>
-        <div className="mb-3 flex items-center justify-between">
+        <div className="mb-3 flex items-center space-between">
           <Typography
             placeholder={""}
-            variant="h5"
+            variant="h3"
             color="blue-gray"
             className="font-bold"
           >
             {name}
           </Typography>
         </div>
-        <Typography placeholder={""} color="gray">
-          {description}
-        </Typography>
+        <div className="CardDescription">
+          <Typography placeholder={""} color="gray" className="h-50">
+            {description}
+          </Typography>
+        </div>
         <div className="group mt-8 inline-flex flex-wrap items-center gap-3">
           <Tooltip content="Marketing">
             <span className="cursor-pointer rounded-full border border-gray-900/5 bg-gray-900/5 p-3 text-gray-900 transition-colors hover:border-gray-900/10 hover:bg-gray-900/10 hover:!opacity-100 group-hover:opacity-70">
@@ -129,7 +131,7 @@ export default function CourseCard({
           </Tooltip>
         </div>
       </CardBody>
-      <CardFooter placeholder={""} className="pt-3">
+      <CardFooter placeholder={""} className="pt-3 bottom-1 relative">
         <Button
           onClick={() => router.push(`/classrooms/${id}`)}
           placeholder={""}

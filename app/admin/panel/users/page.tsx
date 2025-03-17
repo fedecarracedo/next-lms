@@ -9,7 +9,7 @@ import { obtenerTodos } from "@/app/controllers/DatabaseController";
 export default function ManageUsers() {
   const [users, setUsers] = useState<any[]>([]);
   function loadUsers() {
-    let response = fetch("http://localhost:8080/usuario/obtenerUsuarios")
+    let response = fetch("http://localhost:8081/usuario/obtenerUsuarios")
       .then((response) => {
         return response.json();
       })

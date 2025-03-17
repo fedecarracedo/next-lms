@@ -18,13 +18,15 @@
   align-self: flex-start;
 }
 .CourseCard {
-  margin: 0.5rem;
-  width: 25rem;
-  height: 33rem;
+  margin: 0.8rem;
 }
 
 .CourseCard > * {
   font-family: "Gilroy Medium";
+}
+
+.CardDescription {
+  height: 4rem;
 }
 
 .CourseSidebar * {

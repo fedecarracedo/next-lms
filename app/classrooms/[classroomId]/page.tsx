@@ -5,8 +5,14 @@ import "./insideClassroom.css";
 import { useEffect, useState } from "react";
 import { Footer } from "@/app/components/Footer";
 import Aula from "@/app/model/Aula";
-import { obtenerRegistrosPorCampo } from "@/app/controllers/DatabaseController";
+import {
+  obtenerRegistrosPorCampo,
+  obtenerUnidadesCurso,
+} from "@/app/controllers/DatabaseController";
 import parseEditorElement from "@/app/controllers/EditorParser";
+import CourseContents from "../classroomComponents/CourseContents";
+import { select } from "@material-tailwind/react";
+import Unidad from "@/app/model/Unidad";
 
 export default function ClassroomLanding({
   params,
@@ -16,13 +22,17 @@ export default function ClassroomLanding({
   const [selected, setSelected] = useState(0);
   const [classroomData, setClassroomData] = useState<any>();
   const [homeContents, setHomeContents] = useState<JSX.Element[]>([]);
+  const [units, setUnits] = useState<Unidad[]>([]);
 
   async function loadClassroom() {
-    const classroom = await obtenerRegistrosPorCampo(
+    const classroom: Aula[] = await obtenerRegistrosPorCampo(
       "aula",
       "aula_id",
       params.classroomId
     );
+    const unitsDB = await obtenerUnidadesCurso(classroom[0].aula_curso);
+    console.log(unitsDB);
+    setUnits(unitsDB);
     setClassroomData(classroom[0]);
     const homeDataArray = JSON.parse(classroom[0].aula_inicio);
     const homeData = homeDataArray.blocks.map((elem: any) =>
@@ -33,7 +43,7 @@ export default function ClassroomLanding({
 
   useEffect(() => {
     loadClassroom();
-  }, [homeContents]);
+  }, []);
 
   return (
     <div className="PageContainer">
@@ -44,7 +54,8 @@ export default function ClassroomLanding({
       <div className="PageBody">
         <TabBar selected={selected} setSelected={setSelected} />
         <div className="ContentArea">
-          {homeContents}
+          {selected == 0 && homeContents}
+          {selected == 1 && <CourseContents units={units} />}
           <div className="EmptyBlock"></div>
         </div>
       </div>

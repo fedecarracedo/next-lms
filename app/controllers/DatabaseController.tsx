@@ -8,7 +8,7 @@ import Aula from "../model/Aula";
 
 export async function makeGETRequestToApi(ruta: string): Promise<any[]> {
   try {
-    const response = await fetch("http://localhost:8080" + ruta).then(
+    const response = await fetch("http://localhost:8081" + ruta).then(
       (result) => {
         return result.json();
       }
@@ -24,7 +24,7 @@ async function makePOSTRequestToApi(
   payload: any
 ): Promise<OkPacket | undefined> {
   try {
-    const response = await fetch("http://localhost:8080" + ruta, {
+    const response = await fetch("http://localhost:8081" + ruta, {
       method: "POST",
       body: payload,
     }).then((result) => {
@@ -231,7 +231,13 @@ export async function getUserClassrooms(idUsuario: number): Promise<Aula[]> {
 
     if (response.length > 0) {
       const aulas: Aula[] = response.map((elem) => {
-        return new Aula(elem.aula_nombre, elem.aula_id, elem.curso_descripcion);
+        return new Aula(
+          elem.aula_nombre,
+          elem.aula_id,
+          elem.curso_descripcion,
+          elem.aula_inicio,
+          elem.aula_curso
+        );
       });
       return aulas;
     }

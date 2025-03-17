@@ -28,6 +28,7 @@ export default function Cursos() {
       } else {
         aulasUsuario = await obtenerTodos("aula");
       }
+      console.log(aulasUsuario);
       setClassrooms(aulasUsuario);
     }
   }
@@ -43,7 +44,7 @@ export default function Cursos() {
         <CourseSidebar />
         <div className="CourseContainer">
           <h3>Tus aulas</h3>
-          <div className="CourseGallery grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
+          <div className="CourseGallery grid grid-cols-2 gap-5 sm:grid-cols-2 md:grid-cols-3">
             {classrooms.map((elem, index) => (
               <CourseCard
                 key={index}

@@ -1,1 +1,1 @@
-GET https://www.material-tailwind.com/docs/react/installation
+GET http://localhost:8081/curso/obtenerTodos
